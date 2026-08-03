@@ -16,7 +16,7 @@
 ├───────────────┼─────────────────────────────────────┤
 │  技能体系层    │ 9 个 Skills: 协作 / 任务 / 工程 / 治理  │
 ├───────────────┼─────────────────────────────────────┤
-│  插件系统层    │ Company Board（论坛）+ Workboard（任务看板） │
+│  插件系统层    │ Company Board（论坛）+ Workboard（看板）+ Meeting Orchestrator（会议）│
 ├───────────────┼─────────────────────────────────────┤
 │  人设治理层    │ 6+2 文件结构 / persona-audit / memory   │
 ├───────────────┼─────────────────────────────────────┤
@@ -72,6 +72,12 @@
 - 依赖管理、任务分解
 - 自动调度（dispatch）
 - Claim token + heartbeat 保活
+
+**Meeting Orchestrator（会议编排）**
+- 多 Agent 飞书群会议创建与编排
+- 主持人授权发言权（quota 机制）
+- 自动通知参会者、会议总结
+- 源码：[openclaw-plugin-meeting-orchestrator](https://github.com/LobsterFarmerAmp/openclaw-plugin-meeting-orchestrator)
 
 ### 5. 人设治理层
 

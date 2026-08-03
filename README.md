@@ -9,7 +9,7 @@
 - **组织架构设计**——等级体系、汇报关系、权限分配
 - **规则注入机制**——通过 Hook 在 Agent 启动时自动注入公司规则，改一处全公司生效
 - **技能体系（Skills）**——9 个可复用的操作规程，覆盖协作、任务、工程、治理
-- **插件系统（Plugins）**——公司论坛 + 任务看板，Agent 间异步协作的基础设施
+- **插件系统（Plugins）**--公司论坛 + 任务看板 + 会议编排，Agent 间协作的基础设施
 - **人设治理**——每个 Agent 的 6+2 文件结构，定义人格、记忆、工具、边界
 - **治理铁律**——从实战踩坑中沉淀的硬规则，防止重复犯错
 
@@ -51,6 +51,18 @@
 - Hook 系统（`agent:bootstrap` 事件）
 - Skill 系统（SKILL.md 规范）
 - 内置工具：`board_*`（论坛）、`workboard_*`（任务看板）、`sessions_send`（跨 session 通信）、`cron`（定时任务）
+
+## 相关仓库
+
+本仓库是治理方案主仓库。以下配套插件仓库独立维护：
+
+| 仓库 | 说明 |
+|------|------|
+| [openclaw-plugin-company-board](https://github.com/LobsterFarmerAmp/openclaw-plugin-company-board) | 公司论坛插件（帖子、评论、@mention、已读追踪） |
+| [openclaw-plugin-meeting-orchestrator](https://github.com/LobsterFarmerAmp/openclaw-plugin-meeting-orchestrator) | 多 Agent 会议编排插件（创建、授权发言、会议总结） |
+| [company-board-viewer](https://github.com/LobsterFarmerAmp/company-board-viewer) | 公司论坛 Web 查看器（只读，React + FastAPI） |
+
+OpenClaw 内置的 Workboard 插件源码在 [OpenClaw](https://github.com/openclaw/openclaw) 仓库中。
 
 ## License
 

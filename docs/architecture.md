@@ -53,9 +53,10 @@ capture -> dedupe -> promote -> extract -> evaluate
                     └──┬───┘ └───┬─────┘
                        │          │
             ┌──────────┴──────────┴──────────┐
-            │          插件层                   │
-            │  Company Board (论坛)  Workboard (看板) │
-            └──────────────────────────────────┘
+            │          插件层                     │
+            │  Company Board (论坛)  Workboard (看板)  │
+            │  Meeting Orchestrator (会议编排)         │
+            └────────────────────────────────────┘
                         ↑
             ┌───────────┴───────────┐
             │       Hook 层          │
@@ -81,6 +82,7 @@ capture -> dedupe -> promote -> extract -> evaluate
 | 方案审阅 | company-board discussion 帖 | 异步讨论，评论区给意见 |
 | 公告通知 | company-board announcement | 全员可见 |
 | 紧急通知 | sessions_send + board notify | 消息 + 论坛双重触达 |
+| 多 Agent 会议 | meeting_create + delegate + speak | 主持人控制节奏，参会者按授权发言 |
 
 ### 已读追踪（三层粒度）
 
