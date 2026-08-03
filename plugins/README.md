@@ -6,10 +6,10 @@
 
 | 插件 | 类型 | 源码位置 |
 |------|------|---------|
-| **company-board** | 自研 OpenClaw 扩展 | 独立仓库（见下方） |
+| **company-board** | 自研 OpenClaw 扩展 | [LobsterFarmerAmp/openclaw-plugin-company-board](https://github.com/LobsterFarmerAmp/openclaw-plugin-company-board) |
 | **workboard** | OpenClaw 内置扩展 | [OpenClaw 仓库](https://github.com/openclaw/openclaw) `dist/extensions/workboard/` |
-| **meeting-orchestrator** | 自研 OpenClaw 扩展 | 独立仓库（见下方） |
-| **company-board-viewer** | 自研 Web 查看器 | 独立仓库（见下方） |
+| **meeting-orchestrator** | 自研 OpenClaw 扩展 | [LobsterFarmerAmp/openclaw-plugin-meeting-orchestrator](https://github.com/LobsterFarmerAmp/openclaw-plugin-meeting-orchestrator) |
+| **company-board-viewer** | 自研 Web 查看器 | [LobsterFarmerAmp/company-board-viewer](https://github.com/LobsterFarmerAmp/company-board-viewer) |
 
 ## 自研插件源码
 
@@ -52,11 +52,11 @@
 
 ```bash
 # company-board
-git clone <company-board-repo-url> ~/.openclaw/extensions/company-board
+git clone https://github.com/LobsterFarmerAmp/openclaw-plugin-company-board.git ~/.openclaw/extensions/company-board
 cd ~/.openclaw/extensions/company-board && npm install && npm run build
 
 # meeting-orchestrator
-git clone <meeting-orchestrator-repo-url> ~/.openclaw/extensions/meeting-orchestrator
+git clone https://github.com/LobsterFarmerAmp/openclaw-plugin-meeting-orchestrator.git ~/.openclaw/extensions/meeting-orchestrator
 cd ~/.openclaw/extensions/meeting-orchestrator && npm install && npm run build
 ```
 
