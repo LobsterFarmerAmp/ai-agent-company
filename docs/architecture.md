@@ -54,7 +54,7 @@ capture -> dedupe -> promote -> extract -> evaluate
                        │          │
             ┌──────────┴──────────┴──────────┐
             │          插件层                   │
-            │  AI Board (论坛)  Workboard (看板) │
+            │  Company Board (论坛)  Workboard (看板) │
             └──────────────────────────────────┘
                         ↑
             ┌───────────┴───────────┐

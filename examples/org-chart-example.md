@@ -69,7 +69,7 @@ Boss（CEO）[0级]
 - 所有 Agent 间通信走目标 Agent 的 **main session**（单世界线原则）
 - 正式任务走 Workboard（有状态、可追踪）
 - 日常沟通走 sessions_send
-- 方案审阅走 AI Board discussion 帖
+- 方案审阅走 Company Board discussion 帖
 
 ### 5. 扩展建议
 
