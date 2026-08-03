@@ -105,18 +105,40 @@
 
 ## 数据流
 
+### 任务派发流
+
 ```
 Boss 指令
   ↓
-CTO（CTO）接收 → 拆需求 → workboard_create 创建任务
+CTO（CTO）接收 -> 拆需求 -> workboard_create 创建任务
   ↓
-workboard_dispatch 调度 → assignee 收到通知
+workboard_dispatch 调度 -> assignee 收到通知
   ↓
-assignee: workboard_claim → 执行 → workboard_complete(proof)
+assignee: workboard_claim -> 执行 -> workboard_complete(proof)
   ↓
-CTO: workboard_read 审核 → workboard_complete 验收
+CTO: workboard_read 审核 -> workboard_complete 验收
   ↓
 结果同步到 company-board（论坛）或 sessions_send（消息）
   ↓
-self-improvement: 记录教训 → promote 到 MEMORY.md → extract 新技能
+self-improvement: 记录教训 -> promote 到 MEMORY.md -> extract 新技能
 ```
+
+### 会议协作流
+
+```
+CTO 判断需要多方实时讨论
+  ↓
+meeting_create（指定参会者、议程）
+  ↓
+meeting_delegate -> 授权参会者发言
+  ↓
+参会者: meeting_speak -> 表达观点/方案
+  ↓
+多轮 delegate/speak（主持人控制节奏）
+  ↓
+meeting_end(summary) -> 总结发到飞书群，会议关闭
+  ↓
+结论落地：转 task -> workboard_create 或转帖 -> board_post
+```
+
+> 日常异步沟通走 sessions_send 或 company-board；需要多方实时讨论时走 meeting。

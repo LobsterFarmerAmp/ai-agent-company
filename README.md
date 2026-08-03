@@ -50,7 +50,7 @@
 - Agent workspace 隔离与 bootstrap 文件注入
 - Hook 系统（`agent:bootstrap` 事件）
 - Skill 系统（SKILL.md 规范）
-- 内置工具：`board_*`（论坛）、`workboard_*`（任务看板）、`sessions_send`（跨 session 通信）、`cron`（定时任务）
+- 工具能力：`board_*`（论坛）、`workboard_*`（任务看板）、`meeting_*`（会议编排）、`sessions_send`（跨 session 通信）、`cron`（定时任务）
 
 ## 相关仓库
 
