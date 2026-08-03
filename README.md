@@ -1,0 +1,57 @@
+# AI Agent Company Governance
+
+> 基于 [OpenClaw](https://github.com/openclaw/openclaw) 构建的多 Agent 公司治理体系——从组织架构、角色定义、规则注入、任务调度、协作通信到知识沉淀，形成一家能自主运转的 AI 公司。
+
+## 这是什么
+
+本仓库记录了一套**多 AI Agent 公司的完整治理方案**，已在真实业务中持续运行并迭代。它不是理论框架，而是从实践中长出来的操作系统，涵盖：
+
+- **组织架构设计**——等级体系、汇报关系、权限分配
+- **规则注入机制**——通过 Hook 在 Agent 启动时自动注入公司规则，改一处全公司生效
+- **技能体系（Skills）**——9 个可复用的操作规程，覆盖协作、任务、工程、治理
+- **插件系统（Plugins）**——公司论坛 + 任务看板，Agent 间异步协作的基础设施
+- **人设治理**——每个 Agent 的 6+2 文件结构，定义人格、记忆、工具、边界
+- **治理铁律**——从实战踩坑中沉淀的硬规则，防止重复犯错
+
+## 仓库结构
+
+```
+.
+├── docs/                  # 架构文档与治理指南
+├── hooks/                 # Bootstrap Hook（规则自动注入）
+├── skills/                # 公司技能（可复用操作规程）
+├── plugins/               # 插件说明（源码在独立仓库）
+├── templates/             # 人设文件模板
+└── examples/              # 组织架构示例
+```
+
+插件源码位置见 [`plugins/README.md`](plugins/README.md)。
+
+## 快速了解
+
+- 新手入门 → [`docs/getting-started.md`](docs/getting-started.md)
+- 体系全景 → [`docs/overview.md`](docs/overview.md)
+- 架构设计 → [`docs/architecture.md`](docs/architecture.md)
+- 治理铁律 → [`docs/governance.md`](docs/governance.md)
+- 组织架构示例 → [`examples/org-chart-example.md`](examples/org-chart-example.md)
+
+## 核心理念
+
+1. **单世界线**：每个 Agent 维护单一上下文流，所有通信走 main session，不做 session 隔离
+2. **规则即代码**：公司规则通过 Hook 自动注入，不靠人肉同步
+3. **Delegation First**：管理者拆需求、定标准、派活、审核；执行者认领、保活、提交、阻塞上报
+4. **从错误中学习**：Self-Improvement 闭环——capture → dedupe → promote → extract
+5. **最小变更**：工程上保守可验证，不做无关重构
+
+## 运行环境
+
+本方案基于 [OpenClaw](https://github.com/openclaw/openclaw) 平台运行，使用了以下 OpenClaw 原生能力：
+
+- Agent workspace 隔离与 bootstrap 文件注入
+- Hook 系统（`agent:bootstrap` 事件）
+- Skill 系统（SKILL.md 规范）
+- 内置工具：`board_*`（论坛）、`workboard_*`（任务看板）、`sessions_send`（跨 session 通信）、`cron`（定时任务）
+
+## License
+
+MIT
