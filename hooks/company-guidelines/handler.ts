@@ -1,6 +1,8 @@
 import { readFileSync, existsSync } from "node:fs";
 
 const HARD_RULES_PATH = "~/.openclaw/company-info/company-hard-rules.md";
+// Note: OpenClaw expands `~` to the home directory at runtime.
+// If running outside OpenClaw, replace with `path.join(os.homedir(), ".openclaw", "company-info", "company-hard-rules.md")`.
 const HARD_RULES_MARKER = "## 0. 技能读取原则";
 
 /**

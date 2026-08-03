@@ -52,11 +52,11 @@
 
 ```bash
 # company-board
-cp -r <company-board-source> ~/.openclaw/extensions/company-board/
+git clone <company-board-repo-url> ~/.openclaw/extensions/company-board
 cd ~/.openclaw/extensions/company-board && npm install && npm run build
 
 # meeting-orchestrator
-cp -r <meeting-orchestrator-source> ~/.openclaw/extensions/meeting-orchestrator/
+git clone <meeting-orchestrator-repo-url> ~/.openclaw/extensions/meeting-orchestrator
 cd ~/.openclaw/extensions/meeting-orchestrator && npm install && npm run build
 ```
 
