@@ -35,6 +35,7 @@
 - 治理铁律 → [`docs/governance.md`](docs/governance.md)
 - 组织架构示例 → [`examples/org-chart-example.md`](examples/org-chart-example.md)
 - 维护协作约定 → [`docs/maintenance.md`](docs/maintenance.md)
+- 火山 Agent Plan 模型配置 → [`docs/volcengine-agent-plan.md`](docs/volcengine-agent-plan.md)
 
 ## 核心理念
 
