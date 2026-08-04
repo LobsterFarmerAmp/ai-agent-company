@@ -45,11 +45,19 @@ install -m 700 \
 
 解析器脚本内容：
 
-```bash
-#!/bin/bash
-# Read Tavily API key from macOS Keychain
-security find-generic-password -a "$USER" -s "tavily_api_key" -w 2>/dev/null
+```sh
+#!/bin/sh
+
+account=$(/usr/bin/id -un)
+exec /usr/bin/security find-generic-password \
+  -a "$account" \
+  -s "tavily_api_key" \
+  -w
 ```
+
+不能在解析器中使用 `$USER`。OpenClaw 的 exec Secret provider 使用净化环境，
+而本配置的 `passEnv` 只传递 `HOME`；LaunchAgent 下 `$USER` 为空时，`security`
+会以退出码 `44` 报告无法找到 Keychain 条目，并导致 Gateway 启动失败。
 
 ### 3. 配置 SecretRef
 
@@ -91,8 +99,10 @@ pip3 install tavily-python
 ### 5. 验证
 
 ```bash
-# 测试 Keychain 读取
-~/.openclaw/bin/openclaw-keychain-tavily
+# 在 LaunchAgent 类似的净化环境中测试，不输出 Key
+env -i HOME="$HOME" PATH=/usr/bin:/bin \
+  ~/.openclaw/bin/openclaw-keychain-tavily >/dev/null
+echo $?
 
 # 测试搜索
 TAVILY_API_KEY=$(~/.openclaw/bin/openclaw-keychain-tavily) \
@@ -110,3 +120,5 @@ openclaw gateway restart
 - Tavily skill 通过 `TAVILY_API_KEY` 环境变量或 `--api-key` 参数读取密钥。
 - OpenClaw 通过 `skills.entries.tavily.apiKey` SecretRef 自动注入。
 - API Key 禁止明文写入配置文件或记忆文件。
+- 2026-08-04 启动故障及修复记录见
+  [`incidents/2026-08-04-tavily-secretref-startup.md`](incidents/2026-08-04-tavily-secretref-startup.md)。

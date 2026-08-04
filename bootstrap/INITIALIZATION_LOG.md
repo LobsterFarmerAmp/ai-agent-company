@@ -21,6 +21,8 @@
 - 创建用户自有 Gateway token 解析器，并将 `gateway.auth.token` 改为 exec SecretRef。
 - 创建 `main` workspace，并完成一次 GLM-5.2 真实调用验证。
 - 通过 CLI 创建 canonical Main 会话 `agent:main:main`，使其可在 Dashboard 中直接选择。
+- 安装 Tavily skill，将 API Key 存入 macOS Keychain，并通过 exec SecretRef 注入。
+- 修复 Tavily Keychain 解析器对 `$USER` 的错误依赖，改为使用 `/usr/bin/id -un`。
 
 ## 已验证
 
@@ -38,6 +40,8 @@
 - GLM-5.2 支持的推理档位为 `off / minimal / low / medium / high`；`high` 是当前最高可用档。
 - Gateway 已可连接；管理读操作仍需要完成带 `operator.read` 权限的设备配对。
 - `agent:main:main` 使用 `volcengine-agent/glm-5.2` 完成请求并返回 `MAIN_SESSION_READY`。
+- Tavily 解析器在 LaunchAgent 类似的净化环境中返回 `0`；Gateway 恢复运行，
+  连通探针为 `ok`，Dashboard 返回 HTTP 200。
 
 ## 尚未完成
 

@@ -9,6 +9,7 @@
 | `openclaw.example.json` | 当前部署的脱敏基础配置模板 |
 | `bin/openclaw-keychain-volcengine-agent` | 从 macOS Keychain 读取火山 Agent Plan Key |
 | `bin/openclaw-keychain-openclaw-gateway` | 从 macOS Keychain 读取 Gateway token |
+| `bin/openclaw-keychain-tavily` | 从 macOS Keychain 读取 Tavily API Key，供基础施工阶段安装 |
 | `INITIALIZATION_LOG.md` | 本次龙虾池初始化的完成项、验证结果和待办 |
 
 模型配置的原理和字段说明见 [`../docs/volcengine-agent-plan.md`](../docs/volcengine-agent-plan.md)。
