@@ -18,6 +18,7 @@
 ```
 .
 ├── bootstrap/             # 基础初始化配置、脚本与部署台账
+├── setup/                 # 基础施工（架构师上线后自行配置的设施）
 ├── docs/                  # 架构文档与治理指南
 ├── hooks/                 # Bootstrap Hook（规则自动注入）
 ├── skills/                # 公司技能（可复用操作规程）
@@ -38,6 +39,7 @@
 - 维护协作约定 → [`docs/maintenance.md`](docs/maintenance.md)
 - 火山 Agent Plan 模型配置 → [`docs/volcengine-agent-plan.md`](docs/volcengine-agent-plan.md)
 - 基础初始化与当前进度 → [`bootstrap/README.md`](bootstrap/README.md)
+- 基础施工（架构师自配） -> [`setup/README.md`](setup/README.md)
 
 ## 核心理念
 
