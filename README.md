@@ -17,6 +17,7 @@
 
 ```
 .
+├── bootstrap/             # 基础初始化配置、脚本与部署台账
 ├── docs/                  # 架构文档与治理指南
 ├── hooks/                 # Bootstrap Hook（规则自动注入）
 ├── skills/                # 公司技能（可复用操作规程）
@@ -36,6 +37,7 @@
 - 组织架构示例 → [`examples/org-chart-example.md`](examples/org-chart-example.md)
 - 维护协作约定 → [`docs/maintenance.md`](docs/maintenance.md)
 - 火山 Agent Plan 模型配置 → [`docs/volcengine-agent-plan.md`](docs/volcengine-agent-plan.md)
+- 基础初始化与当前进度 → [`bootstrap/README.md`](bootstrap/README.md)
 
 ## 核心理念
 

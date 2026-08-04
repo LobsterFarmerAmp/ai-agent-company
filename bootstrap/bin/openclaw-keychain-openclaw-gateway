@@ -1,0 +1,8 @@
+#!/bin/sh
+
+account=$(/usr/bin/id -un)
+
+exec /usr/bin/security find-generic-password \
+  -a "$account" \
+  -s "openclaw_gateway_token" \
+  -w

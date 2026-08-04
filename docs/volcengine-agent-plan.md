@@ -88,13 +88,21 @@ chmod 700 ~/.openclaw/bin/openclaw-keychain-volcengine-agent
     }
   },
   "agents": {
+    "defaults": {
+      "models": {
+        "volcengine-agent/glm-5.2": {
+          "params": {
+            "thinking": "high"
+          }
+        }
+      }
+    },
     "list": [
       {
         "id": "main",
         "default": true,
         "name": "架构师",
         "workspace": "/Users/<macos-user>/.openclaw/workspace",
-        "thinkingDefault": "high",
         "model": {
           "primary": "volcengine-agent/glm-5.2"
         }
@@ -126,5 +134,5 @@ openclaw agent --local --agent main \
 - 配置校验通过。
 - Secrets audit 显示 `plaintext=0`、`unresolved=0`。
 - `main` 的模型为 `volcengine-agent/glm-5.2`。
-- `main` 未显式指定思考档位时默认使用 GLM-5.2 当前可用的最高档 `high`。OpenClaw 的字面档位 `max` 不在该模型的支持列表中，会被拒绝。
+- `volcengine-agent/glm-5.2` 的模型级默认推理档位为当前可用的最高档 `high`。切换到其他模型时不会继承此设置。OpenClaw 的字面档位 `max` 不在该模型的支持列表中，会被拒绝。
 - 模型请求返回 HTTP 200，并得到 `MODEL_OK`。

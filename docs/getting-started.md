@@ -1,5 +1,7 @@
 # 快速上手
 
+本次 `main` 架构师部署的可执行基础配置、Keychain 解析脚本和初始化进度统一维护在 [`../bootstrap/`](../bootstrap/README.md)。本文件保留通用安装流程。
+
 ## 前置条件
 
 1. 安装 [OpenClaw](https://github.com/openclaw/openclaw)
