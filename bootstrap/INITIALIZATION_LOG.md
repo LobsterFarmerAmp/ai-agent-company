@@ -20,6 +20,7 @@
 - 将 Gateway token 从自动生成的明文配置迁移至 macOS Keychain，service 为 `openclaw_gateway_token`。
 - 创建用户自有 Gateway token 解析器，并将 `gateway.auth.token` 改为 exec SecretRef。
 - 创建 `main` workspace，并完成一次 GLM-5.2 真实调用验证。
+- 通过 CLI 创建 canonical Main 会话 `agent:main:main`，使其可在 Dashboard 中直接选择。
 
 ## 已验证
 
@@ -36,6 +37,7 @@
   Agent Plan 服务过载一致，不属于本地配置解析错误。
 - GLM-5.2 支持的推理档位为 `off / minimal / low / medium / high`；`high` 是当前最高可用档。
 - Gateway 已可连接；管理读操作仍需要完成带 `operator.read` 权限的设备配对。
+- `agent:main:main` 使用 `volcengine-agent/glm-5.2` 完成请求并返回 `MAIN_SESSION_READY`。
 
 ## 尚未完成
 
