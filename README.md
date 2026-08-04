@@ -34,6 +34,7 @@
 - 架构设计 → [`docs/architecture.md`](docs/architecture.md)
 - 治理铁律 → [`docs/governance.md`](docs/governance.md)
 - 组织架构示例 → [`examples/org-chart-example.md`](examples/org-chart-example.md)
+- 维护协作约定 → [`docs/maintenance.md`](docs/maintenance.md)
 
 ## 核心理念
 
@@ -42,6 +43,11 @@
 3. **Delegation First**：管理者拆需求、定标准、派活、审核；执行者认领、保活、提交、阻塞上报
 4. **从错误中学习**：Self-Improvement 闭环——capture → dedupe → promote → extract
 5. **最小变更**：工程上保守可验证，不做无关重构
+
+## 本次部署约定
+
+- `main` Agent 担任 OpenClaw 首席架构师，并接收全部公司规则 Hook。
+- 架构师与 Codex 共同维护龙虾池和本仓库的 `codex/main-agent-architect` 分支；职责与同步流程见 [`docs/maintenance.md`](docs/maintenance.md)。
 
 ## 运行环境
 

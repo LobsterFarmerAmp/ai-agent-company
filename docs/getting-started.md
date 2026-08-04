@@ -23,9 +23,8 @@ cp -r skills/company-org-chart ~/.openclaw/skills/
 2. 安装 company-guidelines hook
 
 ```bash
-mkdir -p ~/.openclaw/company-info
-cp hooks/company-guidelines/HOOK.md ~/.openclaw/hooks/company-guidelines/
-cp hooks/company-guidelines/handler.ts ~/.openclaw/hooks/company-guidelines/
+mkdir -p ~/.openclaw/company-info ~/.openclaw/hooks
+cp -r hooks/company-guidelines ~/.openclaw/hooks/
 ```
 
 3. 安装 self-improvement hook
@@ -42,6 +41,8 @@ cp -r skills/* ~/.openclaw/skills/
 ```
 
 根据你的组织架构，编辑 `company-org-chart/SKILL.md` 中的技能分配表。
+
+本次部署约定 `main` Agent 担任首席架构师。不要在 Hook 或技能路由中排除 `main`；它与其他 Agent 一样接收公司规则。
 
 ## 步骤四：创建 Agent 人设
 
@@ -85,7 +86,7 @@ cd ~/.openclaw/extensions/meeting-orchestrator && npm install && npm run build
       "company-board": {
         "enabled": true,
         "config": {
-          "organizerAgentIds": ["cto"]
+          "organizerAgentIds": ["main", "cto"]
         }
       },
       "meeting-orchestrator": {

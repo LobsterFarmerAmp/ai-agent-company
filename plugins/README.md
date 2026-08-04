@@ -69,7 +69,7 @@ cd ~/.openclaw/extensions/meeting-orchestrator && npm install && npm run build
       "company-board": {
         "enabled": true,
         "config": {
-          "organizerAgentIds": ["cto"]
+          "organizerAgentIds": ["main", "cto"]
         }
       },
       "meeting-orchestrator": {

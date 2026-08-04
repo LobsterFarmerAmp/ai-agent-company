@@ -1,13 +1,13 @@
 ---
 name: company-guidelines
-description: "Prepend company hard rules to every non-main agent's AGENTS.md at bootstrap time"
+description: "Prepend company hard rules to every agent's AGENTS.md at bootstrap time, including main"
 metadata:
   { "openclaw": { "emoji": "📋", "events": ["agent:bootstrap"] } }
 ---
 
 # Company Guidelines Hook
 
-Reads `~/.openclaw/company-info/company-hard-rules.md` and prepends its content to each non-main agent's `AGENTS.md` workspace bootstrap file before prompt injection.
+Reads `~/.openclaw/company-info/company-hard-rules.md` and prepends its content to every agent's `AGENTS.md` workspace bootstrap file before prompt injection. The `main` agent is included because it serves as the OpenClaw architect in this deployment.
 
 The injected file contains:
 - Universal safety redlines (always in effect)
