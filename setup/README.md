@@ -13,7 +13,8 @@
 
 | 路径 | 作用 |
 |------|------|
-| `memory-search.md` | 记忆搜索配置方案、操作步骤与验证标准 |
+| `memory-search.md` | 记忆搜索配置（ollama + qwen3-embedding:4b） |
+| `skills-install.md` | 技能安装与 API Key 配置（self-improving-agent、tavily） |
 
 ## 更新原则
 
