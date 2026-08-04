@@ -6,7 +6,8 @@
 
 ## 已完成
 
-- 将治理仓库拉取到 `~/.openclaw/company`。
+- 将治理仓库拉取到 `~/.openclaw/company/ai-agent-company`；`~/.openclaw/company`
+  作为公司级容器目录，保留给其他公司资产。
 - 创建并推送协作分支 `codex/main-agent-architect`。
 - 确定 `main` 为默认 Agent，并由其担任 OpenClaw 首席架构师。
 - 创建 `~/.openclaw/openclaw.json`，设置 Gateway 为本机模式。
