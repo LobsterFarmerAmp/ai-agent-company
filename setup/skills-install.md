@@ -23,6 +23,14 @@
 - **功能**：AI 优化的 Web 搜索，支持搜索/新闻/域名过滤/内容提取
 - **安装方式**：`openclaw skills install tavily`
 
+### imap-smtp-email 0.0.19
+
+- **来源**：ClawHub `@gzlicanyi/imap-smtp-email`
+- **功能**：通过 IMAP/SMTP 收发邮件，支持多邮箱服务商
+- **安装方式**：`openclaw skills install @gzlicanyi/imap-smtp-email`
+- **安全扫描**：clean（静态扫描 + VirusTotal 均通过）
+- **配置文件**：`~/.config/mail-skills/.env`（权限 600）
+
 ## Tavily API Key 配置
 
 ### 1. 存入 Keychain
@@ -122,3 +130,40 @@ openclaw gateway restart
 - API Key 禁止明文写入配置文件或记忆文件。
 - 2026-08-04 启动故障及修复记录见
   [`incidents/2026-08-04-tavily-secretref-startup.md`](incidents/2026-08-04-tavily-secretref-startup.md)。
+
+## IMAP/SMTP Email 配置
+
+### 1. 配置文件
+
+配置存储在 `~/.config/mail-skills/.env`（权限 600）：
+
+```bash
+PROVIDER=qq
+USERNAME=your@qq.com
+PASSWORD=<授权码，不是QQ密码>
+ALLOWED_READ_DIRS=~/Downloads
+ALLOWED_WRITE_DIRS=~/Downloads
+```
+
+QQ 邮箱需要 IMAP/SMTP 授权码，在 QQ 邮箱设置 -> 账户 -> POP3/SMTP 服务中生成。
+
+### 2. 安装依赖
+
+```bash
+cd ~/.openclaw/workspace/skills/imap-smtp-email
+npm install --production
+```
+
+### 3. 验证
+
+```bash
+node scripts/imap.js check
+```
+
+返回最新邮件 JSON 即为成功。
+
+### 注意事项
+
+- 授权码是邮箱专用密码，不是 QQ 登录密码。
+- 配置文件权限必须 600，禁止他人读取。
+- `ALLOWED_READ_DIRS` / `ALLOWED_WRITE_DIRS` 限制附件读写范围。
