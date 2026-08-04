@@ -16,6 +16,7 @@
 | `memory-search.md` | 记忆搜索配置（ollama + qwen3-embedding:4b） |
 | `skills-install.md` | 技能安装与 API Key 配置（self-improving-agent、tavily、imap-smtp-email） |
 | `hooks-install.md` | Hooks 配置（compaction-notifier、self-improvement） |
+| `session-dreaming.md` | Session 重置策略与 Dreaming 记忆整理 |
 | `incidents/2026-08-04-tavily-secretref-startup.md` | Tavily SecretRef 导致 Gateway 启动失败的根因与修复 |
 
 ## 更新原则
