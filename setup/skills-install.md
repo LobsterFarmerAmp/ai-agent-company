@@ -31,6 +31,13 @@
 - **安全扫描**：clean（静态扫描 + VirusTotal 均通过）
 - **配置文件**：`~/.config/mail-skills/.env`（权限 600）
 
+### coding-agent（bundled）
+
+- **来源**：OpenClaw 内置
+- **功能**：将编码任务委派给 Claude Code 等 coding agent
+- **安装方式**：随 OpenClaw 捆绑，无需额外安装
+- **配置详情**：见 [`coding-agent.md`](coding-agent.md)
+
 ## Tavily API Key 配置
 
 ### 1. 存入 Keychain

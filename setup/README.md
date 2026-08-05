@@ -19,6 +19,7 @@
 | `session-dreaming.md` | Session 重置策略与 Dreaming 记忆整理 |
 | `incidents/2026-08-04-tavily-secretref-startup.md` | Tavily SecretRef 导致 Gateway 启动失败的根因与修复 |
 | `agent-setup-guide.md` | Agent 配置通用操作规程（命名、workspace、注册、验证） |
+| `coding-agent.md` | Coding Agent 配置（Claude Code 2.1.71 + DeepSeek V4 Flash） |
 
 ## 更新原则
 
