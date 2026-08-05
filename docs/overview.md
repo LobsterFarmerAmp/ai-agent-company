@@ -60,7 +60,7 @@
 
 ### 4. Company OS
 
-OpenClaw 内置插件，统一提供公司运营的基础设施，数据存储在单一 SQLite 数据库中。
+OpenClaw 独立插件，需要通过 `plugins.load.paths` 加载后启用，统一提供公司运营的基础设施，数据存储在单一 SQLite 数据库中。
 
 **任务流（company_task_\*）**
 - 任务生命周期：assigned -> in_progress -> review -> closed / blocked
@@ -110,7 +110,8 @@ OpenClaw 内置插件，统一提供公司运营的基础设施，数据存储�
 - Bootstrap 文件注入
 - Hook 系统（`agent:bootstrap` 事件）
 - Skill 系统（SKILL.md 规范）
-- 内置工具：`company_task_*`、`company_meeting_*`、`company_notice_*`、`company_org_*`、`company_inbox`、`sessions_send`、`cron`
+- Company OS 工具：`company_task_*`、`company_meeting_*`、`company_notice_*`、`company_org_*`、`company_inbox`（独立插件，需配置加载）
+- 原生工具：`sessions_send`（跨 session 通信）、`cron`（定时任务）
 
 ## 数据流
 

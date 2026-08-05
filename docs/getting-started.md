@@ -65,11 +65,16 @@ cp templates/USER.md ~/.openclaw/workspace-<agent-id>/
 
 ## 步骤五：启用 Company OS
 
-Company OS 是 OpenClaw 内置插件，无需单独安装。在 `openclaw.json` 中确保插件已启用：
+Company OS 是独立插件，需要配置加载路径后启用。在 `openclaw.json` 中添加：
 
 ```json
 {
   "plugins": {
+    "load": {
+      "paths": [
+        "/path/to/openclaw-plugin-company-os"
+      ]
+    },
     "entries": {
       "company-os": {
         "enabled": true
@@ -78,6 +83,8 @@ Company OS 是 OpenClaw 内置插件，无需单独安装。在 `openclaw.json` 
   }
 }
 ```
+
+> 插件源码位于 `~/.openclaw/company/openclaw-plugin-company-os`，由架构师负责开发和维护。
 
 启用后，以下工具自动可用：
 - `company_task_*` -- 任务创建、启动、进度、提交、验收、阻塞、重派、取消、修订

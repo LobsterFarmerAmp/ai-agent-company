@@ -9,7 +9,7 @@
 - **组织架构设计**——等级体系、汇报关系、权限分配
 - **规则注入机制**——通过 Hook 在 Agent 启动时自动注入公司规则，改一处全公司生效
 - **技能体系（Skills）**——8 个可复用的操作规程，覆盖协作、任务、工程、治理
-- **Company OS**——OpenClaw 内置的公司操作系统，统一提供组织管理、任务流、会议编排、告示板
+- **Company OS**--OpenClaw 独立插件，统一提供组织管理、任务流、会议编排、告示板
 - **人设治理**——每个 Agent 的 6+2 文件结构，定义人格、记忆、工具、边界
 - **治理铁律**——从实战踩坑中沉淀的硬规则，防止重复犯错
 
@@ -59,7 +59,7 @@
 - Agent workspace 隔离与 bootstrap 文件注入
 - Hook 系统（`agent:bootstrap` 事件）
 - Skill 系统（SKILL.md 规范）
-- **Company OS**（内置插件）：`company_task_*`（任务流）、`company_meeting_*`（会议编排）、`company_notice_*`（告示板）、`company_org_*`（组织管理）、`company_inbox`（统一收件箱）
+- **Company OS**（独立插件，需配置 `plugins.load.paths` 加载）：`company_task_*`（任务流）、`company_meeting_*`（会议编排）、`company_notice_*`（告示板）、`company_org_*`（组织管理）、`company_inbox`（统一收件箱）
 - 工具能力：`sessions_send`（跨 session 通信）、`cron`（定时任务）
 
 ## License
