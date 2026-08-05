@@ -12,6 +12,12 @@
   },
   "secrets": {
     "providers": {
+      "macos_keychain_volcengine": {
+        "source": "exec",
+        "command": "/Users/<macos-user>/.openclaw/bin/openclaw-keychain-volcengine",
+        "passEnv": ["HOME"],
+        "jsonOnly": false
+      },
       "macos_keychain_volcengine_agent": {
         "source": "exec",
         "command": "/Users/<macos-user>/.openclaw/bin/openclaw-keychain-volcengine-agent",
@@ -29,6 +35,31 @@
   "models": {
     "mode": "merge",
     "providers": {
+      "volcengine-plan": {
+        "baseUrl": "https://ark.cn-beijing.volces.com/api/coding/v3",
+        "apiKey": {
+          "source": "exec",
+          "provider": "macos_keychain_volcengine",
+          "id": "value"
+        },
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "glm-5.2",
+            "name": "GLM-5.2",
+            "reasoning": true,
+            "input": ["text"],
+            "contextWindow": 1000000,
+            "maxTokens": 128000,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            }
+          }
+        ]
+      },
       "volcengine-agent": {
         "baseUrl": "https://ark.cn-beijing.volces.com/api/plan/v3",
         "apiKey": {
@@ -76,6 +107,11 @@
         "primary": "volcengine-agent/doubao-seed-2.0-pro"
       },
       "models": {
+        "volcengine-plan/glm-5.2": {
+          "params": {
+            "thinking": "high"
+          }
+        },
         "volcengine-agent/glm-5.2": {
           "params": {
             "thinking": "high"
@@ -95,7 +131,8 @@
         "name": "<agent-name>",
         "workspace": "/Users/<macos-user>/.openclaw/workspace",
         "model": {
-          "primary": "volcengine-agent/glm-5.2"
+          "primary": "volcengine-plan/glm-5.2",
+          "fallbacks": ["volcengine-agent/glm-5.2"]
         }
       }
     ]

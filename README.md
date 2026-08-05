@@ -37,6 +37,7 @@
 - 治理铁律 → [`docs/governance.md`](docs/governance.md)
 - 组织架构示例 → [`examples/org-chart-example.md`](examples/org-chart-example.md)
 - 维护协作约定 → [`docs/maintenance.md`](docs/maintenance.md)
+- 火山 Coding Plan + Agent Plan 双 Provider → [`docs/volcengine-dual-plan.md`](docs/volcengine-dual-plan.md)
 - 火山 Agent Plan 模型配置 → [`docs/volcengine-agent-plan.md`](docs/volcengine-agent-plan.md)
 - 基础初始化与当前进度 → [`bootstrap/README.md`](bootstrap/README.md)
 - 基础施工（架构师自配） -> [`setup/README.md`](setup/README.md)

@@ -7,16 +7,29 @@
 | 路径 | 作用 |
 |------|------|
 | `openclaw.example.json` | 当前部署的脱敏基础配置模板 |
+| `bin/openclaw-keychain-volcengine` | 从 macOS Keychain 读取火山 Coding Plan Key |
 | `bin/openclaw-keychain-volcengine-agent` | 从 macOS Keychain 读取火山 Agent Plan Key |
 | `bin/openclaw-keychain-openclaw-gateway` | 从 macOS Keychain 读取 Gateway token |
 | `bin/openclaw-keychain-tavily` | 从 macOS Keychain 读取 Tavily API Key，供基础施工阶段安装 |
 | `INITIALIZATION_LOG.md` | 本次龙虾池初始化的完成项、验证结果和待办 |
 
-模型配置的原理和字段说明见 [`../docs/volcengine-agent-plan.md`](../docs/volcengine-agent-plan.md)。
+双 Provider 拓扑与部署方法见
+[`../docs/volcengine-dual-plan.md`](../docs/volcengine-dual-plan.md)；Agent Plan 模型清单和字段说明见
+[`../docs/volcengine-agent-plan.md`](../docs/volcengine-agent-plan.md)。
 
 ## 初始化顺序
 
 ### 1. 写入 Keychain
+
+火山 Coding Plan API Key：
+
+```bash
+security add-generic-password \
+  -a "$USER" \
+  -s "volcengine" \
+  -U \
+  -w
+```
 
 火山 Agent Plan API Key：
 
@@ -45,6 +58,9 @@ security add-generic-password \
 ```bash
 install -d -m 700 ~/.openclaw/bin
 install -m 700 \
+  bootstrap/bin/openclaw-keychain-volcengine \
+  ~/.openclaw/bin/openclaw-keychain-volcengine
+install -m 700 \
   bootstrap/bin/openclaw-keychain-volcengine-agent \
   ~/.openclaw/bin/openclaw-keychain-volcengine-agent
 install -m 700 \
@@ -72,9 +88,9 @@ openclaw agents list
 openclaw models list --agent main
 openclaw models status --json
 openclaw gateway restart
-openclaw agent --local --agent main \
-  --session-id model-smoke-test \
-  --message "只回复 MODEL_OK" \
+openclaw agent --agent main \
+  --session-id coding-plan-smoke-test \
+  --message "只回复 CODING_PLAN_OK" \
   --thinking high \
   --timeout 60
 ```
@@ -83,12 +99,15 @@ openclaw agent --local --agent main \
 
 - Secret audit 为 `plaintext=0`、`unresolved=0`。
 - `main` 是默认 Agent，身份为架构师。
-- 主模型为 `volcengine-agent/glm-5.2`。
-- GLM-5.2 的模型级默认推理档位为其当前最高可用档 `high`。
+- 主模型为 Coding Plan 的 `volcengine-plan/glm-5.2`，回退模型为 Agent Plan 的
+  `volcengine-agent/glm-5.2`。
+- 其他 Agent 若以 Agent Plan 为首选，则必须反向设置 Coding Plan 为 fallback；主备关系按
+  Agent 绑定，不存在 Provider 级的全局自动互备。
+- 两个 GLM-5.2 模型引用的模型级默认推理档位均为当前最高兼容档 `high`。
 - 专用视觉模型为 `volcengine-agent/doubao-seed-2.0-pro`，支持文本和图像输入，默认推理档位为 `high`。
 - `openclaw models status --json` 将 Doubao Seed 2.0 Pro 解析为 `imageModel`，`openclaw models list --agent main --json`
   显示它可用且输入类型为 `text+image`。
-- GLM-5.2 冒烟请求返回 HTTP 200。
+- 架构师默认请求通过 Coding Plan 返回 `CODING_PLAN_OK`；Agent Plan 回退模型另行完成显式冒烟测试。
 
 ## 更新原则
 

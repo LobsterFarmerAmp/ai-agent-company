@@ -2,6 +2,9 @@
 
 > 本文档指导如何从零配置火山引擎方舟 Agent Plan 作为 OpenClaw 的模型 provider。
 
+当前部署同时使用 Coding Plan 与 Agent Plan；完整拓扑和架构师主备绑定见
+[`volcengine-dual-plan.md`](volcengine-dual-plan.md)。本文保留 Agent Plan 的独立配置与模型清单。
+
 ## 前置条件
 
 - 已购买火山方舟 Agent Plan 套餐（Large 及以上推荐，Small/Medium 不支持视频模型）
