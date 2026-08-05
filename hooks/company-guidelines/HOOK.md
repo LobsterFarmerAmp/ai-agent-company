@@ -11,4 +11,4 @@ Reads `~/.openclaw/company-info/company-hard-rules.md` and prepends its content 
 
 The injected file contains:
 - Universal safety redlines (always in effect)
-- A skill directory index that routes agents to the correct company skill (`company-dialogue`, `company-task-dispatch`, `company-task-execution`, `company-code`, `company-reporting`, `company-org-chart`, `company-board`) before performing covered work.
+- A skill directory index that routes agents to the correct company skill (`company-dialogue`, `company-task-dispatch`, `company-task-execution`, `company-code`, `company-reporting`, `company-org-chart`) before performing covered work.

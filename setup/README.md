@@ -7,7 +7,7 @@
 | 目录 | 执行者 | 时机 | 内容 |
 |------|--------|------|------|
 | `bootstrap/` | Codex | 架构师上线前 | 仓库部署、Keychain、模型 Provider、Gateway token、初始配置 |
-| `setup/` | 架构师 | 上线后 | 记忆搜索、Skills 安装、Hooks 安装、人设替换、Workboard、插件、Channel、Heartbeat 等 |
+| `setup/` | 架构师 | 上线后 | 记忆搜索、Skills 安装、Hooks 安装、人设替换、Company OS、Channel、Heartbeat 等 |
 
 ## 目录内容
 

@@ -9,15 +9,14 @@
 | 技能 | 触发条件 | 作用 |
 |------|---------|------|
 | `company-dialogue` | 跨 agent 对话、发消息 | 单世界线通信规则 |
-| `company-board` | 发帖、评论、@mention | 公司论坛操作规范 |
 | `company-org-chart` | 查询组织架构 | 等级、汇报关系、权限权威源 |
 
 ### 任务类
 
 | 技能 | 触发条件 | 作用 |
 |------|---------|------|
-| `company-task-dispatch` | 创建任务、派活 | workboard 全流程 |
-| `company-task-execution` | 收到任务、提交交付 | claim -> heartbeat -> complete |
+| `company-task-dispatch` | 创建任务、派活 | company_task 全流程 |
+| `company-task-execution` | 收到任务、提交交付 | start -> progress -> submit |
 
 ### 工程类
 

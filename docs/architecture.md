@@ -45,17 +45,20 @@ capture -> dedupe -> promote -> extract -> evaluate
                     │  1级 Agent   │
                     │  (管理者)     │
                     └──┬───────┬───┘
-           workboard    │       │  sessions_send
-          create/dispatch│       │  (跨agent通信)
+           company_task    │       │  sessions_send
+          create/dispatch   │       │  (跨agent通信)
                     ┌───▼──┐ ┌──▼──────┐
                     │2级   │ │2级      │
                     │Agent │ │Agent    │
                     └──┬───┘ └───┬─────┘
                        │          │
             ┌──────────┴──────────┴──────────┐
-            │          插件层                     │
-            │  Company Board (论坛)  Workboard (看板)  │
-            │  Meeting Orchestrator (会议编排)         │
+            │          Company OS              │
+            │  company_task_* (任务流)         │
+            │  company_meeting_* (会议编排)    │
+            │  company_notice_* (告示板)       │
+            │  company_org_* (组织管理)        │
+            │  company_inbox (统一收件箱)      │
             └────────────────────────────────────┘
                         ↑
             ┌───────────┴───────────┐
@@ -77,34 +80,37 @@ capture -> dedupe -> promote -> extract -> evaluate
 
 | 场景 | 机制 | 说明 |
 |------|------|------|
-| 正式派活 | workboard_create + dispatch | 有状态、可追踪、可验收 |
+| 正式派活 | company_task_create | 有状态、可追踪、可验收 |
 | 日常沟通 | sessions_send -> main session | 单世界线，上下文连续 |
-| 方案审阅 | company-board discussion 帖 | 异步讨论，评论区给意见 |
-| 公告通知 | company-board announcement | 全员可见 |
-| 紧急通知 | sessions_send + board notify | 消息 + 论坛双重触达 |
-| 多 Agent 会议 | meeting_create + delegate + speak | 主持人控制节奏，参会者按授权发言 |
+| 方案审阅 | company_meeting_request (discussion) 或 sessions_send | 异步讨论或会议评审 |
+| 公告通知 | company_notice_publish | 全员可见，不可变公告 |
+| 紧急通知 | sessions_send + company_notice_publish | 消息 + 公告双重触达 |
+| 多 Agent 会议 | company_meeting_request + delegate + speak | 主持人控制节奏，参会者按授权发言 |
 
-### 已读追踪（三层粒度）
+### 统一收件箱
 
-| 层级 | 工具 | 清除的通知 |
-|------|------|-----------|
-| 帖子主体 | board_read_post | newPosts |
-| 全部评论 | board_read_comments | repliesToMe + mentions |
-| 单个楼层 | board_read_thread | 仅该楼层的回复和 @ |
+`company_inbox` 汇总与当前 Agent 有关的新任务、验收、风险、未读公告和会议，适合心跳检查。
 
 ## 任务生命周期
 
 ```
-pending ──dispatch──> claimed ──complete(proof)──> review ──organizer验收──> done
-   │                     │                          │
-   │                     │                          └──block──> blocked
-   │                     │                                        │
-   │                     └──release──> pending                    └──unblock──> pending
-   │                     │
-   │                     └──timeout──> pending (自动回收)
-   │
-   └── 有 parents 依赖时，等所有 parents 完成后才可 dispatch
+assigned ──start──> in_progress ──submit──> review ──review(accept)──> closed
+                        │                       │
+                        │                       └──review(reject)──> in_progress
+                        │
+                        ├──block──> blocked
+                        │                │
+                        │                └──unblock──> in_progress
+                        │
+                        └──progress (记录进度，刷新活动时间)
 ```
+
+- 任务由父任务负责人向直属下属创建（`company_task_create`），创建后为 `assigned` 状态
+- 执行者用 `company_task_start` 开始执行，状态变为 `in_progress`
+- 执行者用 `company_task_submit` 提交摘要和证据，状态变为 `review`
+- 派发者用 `company_task_review` 验收（accept 关闭 / reject 退回）
+- 遇到阻塞用 `company_task_block`，解除用 `company_task_unblock`
+- 所有直接子任务必须先终结，父任务才能提交
 
 ## 人设文件注入流程
 

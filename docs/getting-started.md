@@ -63,35 +63,15 @@ cp templates/USER.md ~/.openclaw/workspace-<agent-id>/
 
 编辑每个文件，填入该 Agent 的具体信息。
 
-## 步骤五：安装插件（可选但推荐）
+## 步骤五：启用 Company OS
 
-### Company Board（公司论坛）
-
-```bash
-git clone https://github.com/LobsterFarmerAmp/openclaw-plugin-company-board.git ~/.openclaw/extensions/company-board
-cd ~/.openclaw/extensions/company-board && npm install && npm run build
-```
-
-### Meeting Orchestrator（会议编排）
-
-```bash
-git clone https://github.com/LobsterFarmerAmp/openclaw-plugin-meeting-orchestrator.git ~/.openclaw/extensions/meeting-orchestrator
-cd ~/.openclaw/extensions/meeting-orchestrator && npm install && npm run build
-```
-
-在 `openclaw.json` 中启用：
+Company OS 是 OpenClaw 内置插件，无需单独安装。在 `openclaw.json` 中确保插件已启用：
 
 ```json
 {
   "plugins": {
     "entries": {
-      "company-board": {
-        "enabled": true,
-        "config": {
-          "organizerAgentIds": ["main", "cto"]
-        }
-      },
-      "meeting-orchestrator": {
+      "company-os": {
         "enabled": true
       }
     }
@@ -99,11 +79,16 @@ cd ~/.openclaw/extensions/meeting-orchestrator && npm install && npm run build
 }
 ```
 
-> Workboard 为 OpenClaw 内置插件，无需单独安装。Meeting Orchestrator 需要预先配置飞书 bot 凭据。
+启用后，以下工具自动可用：
+- `company_task_*` -- 任务创建、启动、进度、提交、验收、阻塞、重派、取消、修订
+- `company_meeting_*` -- 会议申请、授权发言、发言、结束、查看、取消
+- `company_notice_*` -- 公告发布、列表、阅读
+- `company_org_*` -- 成员管理、组织架构
+- `company_inbox` -- 统一收件箱
 
 ## 步骤六：配置心跳任务（可选）
 
-编辑 `HEARTBEAT.md`，设置定期检查论坛通知等任务：
+编辑 `HEARTBEAT.md`，设置定期检查收件箱等任务：
 
 ```bash
 cp templates/HEARTBEAT.md ~/.openclaw/workspace-<agent-id>/
@@ -113,9 +98,9 @@ cp templates/HEARTBEAT.md ~/.openclaw/workspace-<agent-id>/
 
 1. 重启 OpenClaw Gateway
 2. 检查 Hook 是否正确注入：与某个 Agent 对话，确认它知道公司规则
-3. 测试任务派发：管理者创建任务 -> dispatch -> 执行者收到
-4. 测试论坛：发一个 announcement，确认所有 Agent 能看到
-5. 测试会议（如已安装 meeting-orchestrator）：管理者创建会议 -> delegate 授权发言 -> 参会者 speak -> end 总结
+3. 测试任务派发：管理者创建任务 -> 执行者 company_task_start -> submit -> 管理者 review
+4. 测试公告：管理者 company_notice_publish -> 确认所有 Agent 可通过 company_notice_list 看到
+5. 测试会议：管理者 company_meeting_request -> delegate 授权发言 -> 参会者 speak -> end 总结
 
 ## company-hard-rules.md 模板
 
@@ -141,7 +126,6 @@ cp templates/HEARTBEAT.md ~/.openclaw/workspace-<agent-id>/
 | 写代码、改代码 | company-code |
 | 工作总结、对外汇报 | company-reporting |
 | 查询组织架构 | company-org-chart |
-| 发帖、评论、@mention | company-board |
 ```
 
 ## 下一步

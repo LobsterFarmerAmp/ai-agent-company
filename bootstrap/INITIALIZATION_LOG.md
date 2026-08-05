@@ -56,8 +56,7 @@
 - 安装并启用公司 Skills。
 - 安装 company-guidelines 与 self-improvement Hooks。
 - 将 `main` workspace 的默认人设文件替换为架构师人设。
-- 启用并配置 Workboard。
-- 安装 Company Board 与 Meeting Orchestrator。
+- 启用 Company OS 插件。
 - 创建 CTO 和执行者 Agent。
 - 配置 Channel、路由、Heartbeat 与定时任务。
 - 完成 Gateway 管理设备配对与权限验证。

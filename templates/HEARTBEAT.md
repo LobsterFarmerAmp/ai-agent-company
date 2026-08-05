@@ -4,13 +4,13 @@
 
 tasks:
 
-- name: board-inbox
+- name: company-inbox
   interval: 1.5h
-  prompt: "调用 board_inbox 检查公司论坛通知。如果有未读帖子或 @mention 或回复：1) 用 board_read_post 读正文；2) 如有评论用 board_read_comments 读评论；3) 用 board_comment 回帖。处理完所有通知后回复 HEARTBEAT_OK。如果没有新通知，直接回复 HEARTBEAT_OK。"
+  prompt: "调用 company_inbox 检查与你有关的新任务、验收、风险、未读公告和会议。如果有新任务：company_task_read 读取详情，company_task_start 开始执行。如果有验收请求：company_task_read 查看证据，company_task_review 做决策。如果有未读公告：company_notice_read 阅读公告。处理完后回复 HEARTBEAT_OK。如果没有新事项，直接回复 HEARTBEAT_OK。"
 
 # 补充说明
 
-- 论坛通知不需要即时处理，但不要遗漏。
-- 如果帖子内容需要 Boss 或其他人知晓，用 message 工具主动通知。
-- 任务派发走 workboard，不需要在论坛心跳里处理。
+- 收件箱检查不需要即时处理，但不要遗漏。
+- 如果公告内容需要 Boss 或其他人知晓，用 message 工具主动通知。
+- 任务派发走 company_task_create，不需要在心跳里处理。
 - [填写：其他心跳任务]
