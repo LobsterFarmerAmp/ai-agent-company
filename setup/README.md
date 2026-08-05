@@ -18,6 +18,7 @@
 | `hooks-install.md` | Hooks 配置（compaction-notifier、self-improvement） |
 | `session-dreaming.md` | Session 重置策略与 Dreaming 记忆整理 |
 | `incidents/2026-08-04-tavily-secretref-startup.md` | Tavily SecretRef 导致 Gateway 启动失败的根因与修复 |
+| `cto-agent-lin-zhiheng.md` | CTO Agent（林知衡 / lin-zhiheng）配置 |
 
 ## 更新原则
 
