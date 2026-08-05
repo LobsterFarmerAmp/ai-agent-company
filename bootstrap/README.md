@@ -85,8 +85,8 @@ openclaw agent --local --agent main \
 - `main` 是默认 Agent，身份为架构师。
 - 主模型为 `volcengine-agent/glm-5.2`。
 - GLM-5.2 的模型级默认推理档位为其当前最高可用档 `high`。
-- 专用视觉模型为 `volcengine-agent/kimi-k3`，支持文本和图像输入，默认推理档位为 `high`。
-- `openclaw models status --json` 将 Kimi K3 解析为 `imageModel`，`openclaw models list --agent main --json`
+- 专用视觉模型为 `volcengine-agent/doubao-seed-2.0-pro`，支持文本和图像输入，默认推理档位为 `high`。
+- `openclaw models status --json` 将 Doubao Seed 2.0 Pro 解析为 `imageModel`，`openclaw models list --agent main --json`
   显示它可用且输入类型为 `text+image`。
 - GLM-5.2 冒烟请求返回 HTTP 200。
 

@@ -53,12 +53,12 @@
             }
           },
           {
-            "id": "kimi-k3",
-            "name": "Kimi K3",
+            "id": "doubao-seed-2.0-pro",
+            "name": "Doubao Seed 2.0 Pro",
             "reasoning": true,
             "input": ["text", "image"],
             "contextWindow": 262144,
-            "maxTokens": 32768,
+            "maxTokens": 128000,
             "cost": {
               "input": 0,
               "output": 0,
@@ -73,7 +73,7 @@
   "agents": {
     "defaults": {
       "imageModel": {
-        "primary": "volcengine-agent/kimi-k3"
+        "primary": "volcengine-agent/doubao-seed-2.0-pro"
       },
       "models": {
         "volcengine-agent/glm-5.2": {
@@ -81,7 +81,7 @@
             "thinking": "high"
           }
         },
-        "volcengine-agent/kimi-k3": {
+        "volcengine-agent/doubao-seed-2.0-pro": {
           "params": {
             "thinking": "high"
           }

@@ -20,7 +20,6 @@
 | `incidents/2026-08-04-tavily-secretref-startup.md` | Tavily SecretRef 导致 Gateway 启动失败的根因与修复 |
 | `cto-agent-lin-zhiheng.md` | CTO Agent（林知衡 / lin-zhiheng）配置 |
 | `agent-setup-guide.md` | Agent 配置通用操作规程（命名、workspace、注册、验证） |
-| `image-model-switch.md` | 视觉模型从 kimi-k3 切换到 doubao-seed-2.0-pro |
 
 ## 更新原则
 
