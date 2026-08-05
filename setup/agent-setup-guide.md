@@ -1,6 +1,6 @@
 # Agent 配置指南
 
-> 架构师上线后配置新 Agent 的标准操作规程。以林知衡 (lin-zhiheng) 为首次实践案例沉淀。
+> 配置新 Agent 的标准操作规程。
 
 ## 前置条件
 
@@ -12,9 +12,8 @@
 
 ### 1. 命名
 
-- Agent ID：中文名拼音，姓氏全拼 + 名字拼音，用连字符连接（如 `lin-zhiheng`）
+- Agent ID：中文名拼音，姓氏全拼 + 名字拼音，用连字符连接
 - 中文名：有寓意，名字反映职责特质
-- 示例：林知衡（知=洞察，衡=权衡判断 → CTO 的核心能力）
 
 ### 2. 创建 Workspace
 
@@ -61,7 +60,7 @@ mkdir -p ~/.openclaw/workspace-<agent-id>/memory
 - `identity.name` 必须显式设置，否则 dashboard 显示为 "assistant"
 - `identity.emoji` 用于 dashboard 和消息中的视觉标识
 - `name` 和 `identity.name` 都要设
-- `model` 通常与架构师相同，后续按需调整
+- `model` 通常与默认 agent 相同，后续按需调整
 - `memorySearch`、`imageModel` 等继承 defaults，无需重复
 
 ### 5. 受保护路径注意
@@ -102,7 +101,7 @@ openclaw status
 - 实际 openclaw.json 配置
 - 待办事项
 
-### 9. 更新架构师记忆
+### 9. 更新默认 agent 的记忆文件
 
 - 更新 `MEMORY.md` 的 `Cross-Agent Collaboration` 段
 - 更新 `memory/YYYY-MM-DD.md` 日志

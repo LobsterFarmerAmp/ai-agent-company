@@ -92,7 +92,7 @@
       {
         "id": "main",
         "default": true,
-        "name": "架构师",
+        "name": "<agent-name>",
         "workspace": "/Users/<macos-user>/.openclaw/workspace",
         "model": {
           "primary": "volcengine-agent/glm-5.2"
