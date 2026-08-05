@@ -1,6 +1,6 @@
 # 快速上手
 
-本次 `main` 架构师部署的可执行基础配置、Keychain 解析脚本和初始化进度统一维护在 [`../bootstrap/`](../bootstrap/README.md)。本文件保留通用安装流程。
+本次 `jia-goushi` 架构师部署的可执行基础配置、Keychain 解析脚本和初始化进度统一维护在 [`../bootstrap/`](../bootstrap/README.md)。本文件保留通用安装流程。
 
 ## 前置条件
 
@@ -44,7 +44,7 @@ cp -r skills/* ~/.openclaw/skills/
 
 根据你的组织架构，编辑 `company-org-chart/SKILL.md` 中的技能分配表。
 
-本次部署约定 `main` Agent 担任首席架构师。不要在 Hook 或技能路由中排除 `main`；它与其他 Agent 一样接收公司规则。
+本次部署约定 `jia-goushi` Agent 担任首席架构师。不要在 Hook 或技能路由中排除 `jia-goushi`；它与其他 Agent 一样接收公司规则。
 
 ## 步骤四：创建 Agent 人设
 

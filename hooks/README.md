@@ -4,7 +4,7 @@ Hooks 在 OpenClaw 的 `agent:bootstrap` 事件时触发，实现规则自动注
 
 ## company-guidelines
 
-**作用**：读取 `~/.openclaw/company-info/company-hard-rules.md`，在 bootstrap 时将其内容注入到每个 Agent（包括 `main`）的 `AGENTS.md` 前面。本次部署由 `main` 担任架构师，因此它必须接收相同的公司规则。
+**作用**：读取 `~/.openclaw/company-info/company-hard-rules.md`，在 bootstrap 时将其内容注入到每个 Agent（包括 `jia-goushi`）的 `AGENTS.md` 前面。本次部署由 `jia-goushi` 担任架构师，因此它必须接收相同的公司规则。
 
 **效果**：公司规则改一处，所有 Agent 下次启动时自动生效。无需逐个修改 Agent 的 workspace 文件。
 

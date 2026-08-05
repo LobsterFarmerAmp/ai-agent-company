@@ -85,10 +85,10 @@ chmod 600 ~/.openclaw/openclaw.json
 openclaw config validate
 openclaw secrets audit --check --allow-exec
 openclaw agents list
-openclaw models list --agent main
+openclaw models list --agent jia-goushi
 openclaw models status --json
 openclaw gateway restart
-openclaw agent --agent main \
+openclaw agent --agent jia-goushi \
   --session-id coding-plan-smoke-test \
   --message "只回复 CODING_PLAN_OK" \
   --thinking high \
@@ -98,14 +98,14 @@ openclaw agent --agent main \
 验收标准：
 
 - Secret audit 为 `plaintext=0`、`unresolved=0`。
-- `main` 是默认 Agent，身份为架构师。
+- `jia-goushi` 是架构师 Agent，身份为 OpenClaw 首席架构师。
 - 主模型为 Coding Plan 的 `volcengine-plan/glm-5.2`，回退模型为 Agent Plan 的
   `volcengine-agent/glm-5.2`。
 - 其他 Agent 若以 Agent Plan 为首选，则必须反向设置 Coding Plan 为 fallback；主备关系按
   Agent 绑定，不存在 Provider 级的全局自动互备。
 - 两个 GLM-5.2 模型引用的模型级默认推理档位均为当前最高兼容档 `high`。
 - 专用视觉模型为 `volcengine-agent/doubao-seed-2.0-pro`，支持文本和图像输入，默认推理档位为 `high`。
-- `openclaw models status --json` 将 Doubao Seed 2.0 Pro 解析为 `imageModel`，`openclaw models list --agent main --json`
+- `openclaw models status --json` 将 Doubao Seed 2.0 Pro 解析为 `imageModel`，`openclaw models list --agent jia-goushi --json`
   显示它可用且输入类型为 `text+image`。
 - 架构师默认请求通过 Coding Plan 返回 `CODING_PLAN_OK`；Agent Plan 回退模型另行完成显式冒烟测试。
 

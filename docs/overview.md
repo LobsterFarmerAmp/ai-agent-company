@@ -82,7 +82,7 @@ OpenClaw 独立插件，需要通过 `plugins.load.paths` 加载后启用，统�
 
 **组织管理（company_org_\*）**
 - 成员、职位、层级、在职状态管理
-- 仅架构师（main）可新增/停用/更新成员
+- 仅架构师（jia-goushi）可新增/停用/更新成员
 
 **统一收件箱（company_inbox）**
 - 汇总新任务、验收、风险、未读公告和会议

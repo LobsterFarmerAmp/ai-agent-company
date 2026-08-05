@@ -4,7 +4,7 @@
 
 ## 前置条件
 
-- 已有 `main` agent（架构师）正常运行
+- 已有 `jia-goushi` agent（架构师）正常运行
 - 治理仓库 `~/.openclaw/company/ai-agent-company` 已部署
 - 模板目录 `templates/` 可用
 

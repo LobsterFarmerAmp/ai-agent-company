@@ -3,7 +3,7 @@
 ## 角色分工
 
 - **Boss**：确定组织目标、授权边界和重要变更。
-- **架构师（`main` Agent）**：维护龙虾池运行状态，包括 OpenClaw 配置、Agent、workspace、Skills、Hooks、插件、Gateway 与定时任务。
+- **架构师（`jia-goushi` Agent）**：维护龙虾池运行状态，包括 OpenClaw 配置、Agent、workspace、Skills、Hooks、插件、Gateway 与定时任务。
 - **Codex**：维护本仓库优化分支，负责代码和文档变更、静态检查、差异审阅与可复现验证，并协助架构师排查龙虾池问题。
 
 ## 单一权威源

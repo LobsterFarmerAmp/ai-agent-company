@@ -1,6 +1,6 @@
 # 火山引擎双 Provider 配置
 
-当前龙虾池同时接入火山引擎 Coding Plan 与 Agent Plan。`main` 架构师优先使用 Coding Plan 的
+当前龙虾池同时接入火山引擎 Coding Plan 与 Agent Plan。`jia-goushi` 架构师优先使用 Coding Plan 的
 GLM-5.2，失败时回退到 Agent Plan 的 GLM-5.2；视觉任务继续交给 Agent Plan 的
 Doubao Seed 2.0 Pro。
 
@@ -45,7 +45,7 @@ install -m 700 bootstrap/bin/openclaw-keychain-volcengine-agent \
   `secrets.providers.macos_keychain_volcengine_agent`
 - `models.providers.volcengine-plan` 与 `models.providers.volcengine-agent`
 - `agents.defaults.models` 中两个 GLM-5.2 模型引用的 `thinking: high`
-- `agents.list` 中 `main.model.primary` 和 `main.model.fallbacks`
+- `agents.list` 中 `jia-goushi.model.primary` 和 `jia-goushi.model.fallbacks`
 - `agents.defaults.imageModel.primary`
 
 架构师的主备绑定为：
@@ -75,7 +75,7 @@ Fallback 是按 Agent 单向定义的。两个 Provider “互为回退”意味
 }
 ```
 
-当前部署中，`main` 架构师使用第一种绑定；以 Agent Plan 为首选的 Agent 使用第二种绑定。
+当前部署中，`jia-goushi` 架构师使用第一种绑定；以 Agent Plan 为首选的 Agent 使用第二种绑定。
 不要把两个方向同时塞进同一个 Agent 的 fallback 数组，也不要把主模型再次列入自己的 fallback。
 
 Coding Plan 的 provider 使用
@@ -91,7 +91,7 @@ OpenClaw 文档中 GLM-5.2 的 `max` 映射特例针对 `zai/*` Provider，不�
 chmod 600 ~/.openclaw/openclaw.json
 openclaw config validate
 openclaw secrets audit --check --allow-exec
-openclaw models list --agent main --json
+openclaw models list --agent jia-goushi --json
 openclaw models status --json
 openclaw gateway restart
 ```
@@ -102,8 +102,8 @@ openclaw gateway restart
 验收标准：
 
 - 配置校验与 Secrets audit 通过，`plaintext=0`、`unresolved=0`
-- `main` 默认解析到 `volcengine-plan/glm-5.2`
-- `main` 的 fallback 为 `volcengine-agent/glm-5.2`
+- `jia-goushi` 默认解析到 `volcengine-plan/glm-5.2`
+- `jia-goushi` 的 fallback 为 `volcengine-agent/glm-5.2`
 - 所有 Agent 都遵循双向互备规则：Coding Plan 首选时回退 Agent Plan，Agent Plan 首选时反向回退
   Coding Plan
 - 两个 GLM-5.2 模型均可完成真实请求

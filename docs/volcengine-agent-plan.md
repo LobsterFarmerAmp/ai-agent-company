@@ -158,7 +158,7 @@ chmod 600 ~/.openclaw/openclaw.json
 openclaw config validate
 openclaw secrets audit --check --allow-exec
 openclaw agents list
-openclaw models list --agent main
+openclaw models list --agent jia-goushi
 openclaw models status --json
 ```
 
@@ -166,7 +166,7 @@ openclaw models status --json
 
 ```bash
 # 测试主模型
-openclaw agent --local --agent main \
+openclaw agent --local --agent jia-goushi \
   --session-id model-smoke-test \
   --message "只回复 MODEL_OK" \
   --thinking off \
@@ -177,7 +177,7 @@ openclaw agent --local --agent main \
 
 - 配置校验通过
 - Secrets audit 显示 `plaintext=0`、`unresolved=0`
-- `main` 的模型为 `volcengine-agent/glm-5.2`
+- `jia-goushi` 的模型为 `volcengine-agent/glm-5.2`
 - `volcengine-agent/glm-5.2` 的模型级默认推理档位为 `high`（OpenClaw 的 `max` 不被该模型支持，会被拒绝）
 - 视觉模型为 `volcengine-agent/doubao-seed-2.0-pro`，支持文本和图像输入
 - GLM-5.2 冒烟请求返回 HTTP 200，并得到 `MODEL_OK`
