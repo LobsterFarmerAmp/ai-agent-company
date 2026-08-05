@@ -1,7 +1,7 @@
 # 火山引擎 Agent Plan 模型配置
 
 本部署使用火山引擎方舟 Agent Plan 的 `glm-5.2` 作为 `main` 架构师的主模型，
-使用 `kimi-k3` 作为专用视觉理解模型。两者共用 Agent Plan provider；API Key
+使用 `doubao-seed-2.0-pro` 作为专用视觉理解模型。两者共用 Agent Plan provider；API Key
 存放在 macOS Keychain，OpenClaw 配置只保存 SecretRef。
 
 ## 1. 写入 Keychain
@@ -86,12 +86,12 @@ chmod 700 ~/.openclaw/bin/openclaw-keychain-volcengine-agent
             }
           },
           {
-            "id": "kimi-k3",
-            "name": "Kimi K3",
+            "id": "doubao-seed-2.0-pro",
+            "name": "Doubao Seed 2.0 Pro",
             "reasoning": true,
             "input": ["text", "image"],
             "contextWindow": 262144,
-            "maxTokens": 32768,
+            "maxTokens": 128000,
             "cost": {
               "input": 0,
               "output": 0,
@@ -106,7 +106,7 @@ chmod 700 ~/.openclaw/bin/openclaw-keychain-volcengine-agent
   "agents": {
     "defaults": {
       "imageModel": {
-        "primary": "volcengine-agent/kimi-k3"
+        "primary": "volcengine-agent/doubao-seed-2.0-pro"
       },
       "models": {
         "volcengine-agent/glm-5.2": {
@@ -114,7 +114,7 @@ chmod 700 ~/.openclaw/bin/openclaw-keychain-volcengine-agent
             "thinking": "high"
           }
         },
-        "volcengine-agent/kimi-k3": {
+        "volcengine-agent/doubao-seed-2.0-pro": {
           "params": {
             "thinking": "high"
           }
@@ -160,5 +160,5 @@ openclaw agent --local --agent main \
 - Secrets audit 显示 `plaintext=0`、`unresolved=0`。
 - `main` 的模型为 `volcengine-agent/glm-5.2`。
 - `volcengine-agent/glm-5.2` 的模型级默认推理档位为当前可用的最高档 `high`。切换到其他模型时不会继承此设置。OpenClaw 的字面档位 `max` 不在该模型的支持列表中，会被拒绝。
-- 专用视觉模型为 `volcengine-agent/kimi-k3`，支持文本和图像输入，模型级默认推理档位为 `high`。
+- 专用视觉模型为 `volcengine-agent/doubao-seed-2.0-pro`，支持文本和图像输入，模型级默认推理档位为 `high`。2026-08-05 从 kimi-k3 切换（k3 看图太卡 15s+，doubao-seed-2.0-pro 约 2-3s）。
 - GLM-5.2 冒烟请求返回 HTTP 200，并得到 `MODEL_OK`。
