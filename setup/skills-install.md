@@ -1,6 +1,7 @@
 # 技能安装
 
 > 配置日期：2026-08-04  
+> 更新日期：2026-08-06  
 > 执行者：架构师
 
 ## 已安装技能
@@ -17,12 +18,6 @@
 - 多了 assets 模板和 CHANGELOG
 - 少了 `learnings.py` CLI 管理工具（4.0.0 起移除）
 
-### tavily 1.0.0
-
-- **来源**：ClawHub `tavily`（bert-builder 出品）
-- **功能**：AI 优化的 Web 搜索，支持搜索/新闻/域名过滤/内容提取
-- **安装方式**：`openclaw skills install tavily`
-
 ### imap-smtp-email 0.0.19
 
 - **来源**：ClawHub `@gzlicanyi/imap-smtp-email`
@@ -37,6 +32,39 @@
 - **功能**：将编码任务委派给 Claude Code 等 coding agent
 - **安装方式**：随 OpenClaw 捆绑，无需额外安装
 - **配置详情**：见 [`coding-agent.md`](coding-agent.md)
+
+## Web 搜索配置
+
+### 2026-08-06：Tavily skill 替换为内置 web_search
+
+**变更：** 移除独立的 Tavily skill（`~/.openclaw/skills/tavily/`），改为安装 Tavily 插件（`@openclaw/tavily-plugin`）作为内置 `web_search` 工具的 provider。
+
+**原因：** OpenClaw 内置 `web_search` 工具 + Tavily 插件提供 provider 支持，比独立 skill 更集成化，无需通过 exec 调用 Python 脚本。
+
+**当前配置：**
+
+```json
+{
+  "tools": {
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "tavily"
+      }
+    }
+  }
+}
+```
+
+Tavily API Key 通过环境变量 `TAVILY_API_KEY` 注入（写入 `~/.openclaw/service-env/ai.openclaw.gateway.env`），Keychain 解析器保留不变。
+
+**安装方式：**
+
+```bash
+openclaw plugins install @openclaw/tavily-plugin
+```
+
+**注意：** Tavily 插件仅提供 `web_search` provider 支持，不再有独立的 `tavily_search` / `tavily_extract` 工具。如需 URL 内容提取，使用内置 `web_fetch` 工具。
 
 ## Tavily API Key 配置
 
@@ -74,69 +102,24 @@ exec /usr/bin/security find-generic-password \
 而本配置的 `passEnv` 只传递 `HOME`；LaunchAgent 下 `$USER` 为空时，`security`
 会以退出码 `44` 报告无法找到 Keychain 条目，并导致 Gateway 启动失败。
 
-### 3. 配置 SecretRef
+### 3. 注入环境变量
 
-在 `~/.openclaw/openclaw.json` 中添加：
-
-```json
-{
-  "secrets": {
-    "providers": {
-      "macos_keychain_tavily": {
-        "source": "exec",
-        "command": "/Users/<macos-user>/.openclaw/bin/openclaw-keychain-tavily",
-        "passEnv": ["HOME"],
-        "jsonOnly": false
-      }
-    }
-  },
-  "skills": {
-    "entries": {
-      "tavily": {
-        "enabled": true,
-        "apiKey": {
-          "source": "exec",
-          "provider": "macos_keychain_tavily",
-          "id": "value"
-        }
-      }
-    }
-  }
-}
-```
-
-### 4. 安装 Python 依赖
+在 `~/.openclaw/service-env/ai.openclaw.gateway.env` 中添加：
 
 ```bash
-pip3 install tavily-python
+export TAVILY_API_KEY='***'
 ```
 
-### 5. 验证
+Keychain 解析器在 Gateway 启动前解析并注入环境变量。
+
+### 4. 验证
 
 ```bash
 # 在 LaunchAgent 类似的净化环境中测试，不输出 Key
 env -i HOME="$HOME" PATH=/usr/bin:/bin \
   ~/.openclaw/bin/openclaw-keychain-tavily >/dev/null
 echo $?
-
-# 测试搜索
-TAVILY_API_KEY=$(~/.openclaw/bin/openclaw-keychain-tavily) \
-  python3 ~/.openclaw/workspace/skills/tavily/scripts/tavily_search.py "test query" --max-results 1
 ```
-
-### 6. 重启 Gateway
-
-```bash
-openclaw gateway restart
-```
-
-## 注意事项
-
-- Tavily skill 通过 `TAVILY_API_KEY` 环境变量或 `--api-key` 参数读取密钥。
-- OpenClaw 通过 `skills.entries.tavily.apiKey` SecretRef 自动注入。
-- API Key 禁止明文写入配置文件或记忆文件。
-- 2026-08-04 启动故障及修复记录见
-  [`incidents/2026-08-04-tavily-secretref-startup.md`](incidents/2026-08-04-tavily-secretref-startup.md)。
 
 ## IMAP/SMTP Email 配置
 

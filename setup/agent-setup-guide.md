@@ -45,7 +45,8 @@ mkdir -p ~/.openclaw/workspace-<agent-id>/memory
   "name": "<中文名>",
   "workspace": "/Users/<user>/.openclaw/workspace-<agent-id>",
   "model": {
-    "primary": "volcengine-agent/glm-5.2"
+    "primary": "volcengine-plan/glm-5.2",
+    "fallbacks": ["volcengine-agent/glm-5.2"]
   },
   "thinkingDefault": "high",
   "identity": {
@@ -61,6 +62,7 @@ mkdir -p ~/.openclaw/workspace-<agent-id>/memory
 - `identity.emoji` 用于 dashboard 和消息中的视觉标识
 - `name` 和 `identity.name` 都要设
 - `model` 通常与默认 agent 相同，后续按需调整
+- **模型优先级策略**（2026-08-06 起）：Coding Plan（`volcengine-plan`）为 primary，Agent Plan（`volcengine-agent`）为 fallback。原因：Agent Plan 额度紧张，Coding Plan 优先消耗。Coding Plan 使用限制为 AI 编程工具场景，不适用于 API 调用。
 - `memorySearch`、`imageModel` 等继承 defaults，无需重复
 
 ### 5. 受保护路径注意
