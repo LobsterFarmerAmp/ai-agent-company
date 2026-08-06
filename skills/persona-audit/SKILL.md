@@ -27,8 +27,9 @@ Load when running this skill:
 3. Count current lines/bytes for each file.
 4. List workspace-root files/directories, excluding `.git`, `.openclaw`, `memory/`, `skills/`, `avatars/`.
 5. Apply `references/rules.md`.
-6. **Directly edit** persona files: trim over-budget content, remove hook duplication, resolve cross-file contradictions, clean up workspace.
-7. Report what was changed.
+6. **Sync with reality**: search recent 24h session history and `memory/*.md` files for decisions, corrections, role changes, new standing rules, or updated facts that should be reflected in persona files. Use `memory_search` and read the latest `memory/YYYY-MM-DD.md`.
+7. **Directly edit** persona files: trim over-budget content, remove hook duplication, resolve cross-file contradictions, incorporate reality-sync findings, clean up workspace.
+8. Report what was changed.
 
 ## Output
 

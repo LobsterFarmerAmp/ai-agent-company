@@ -72,6 +72,24 @@ Test: would this still matter if the agent switched projects? If not, move it ou
 
 Contradictions: fix in favor of the authoritative source (org-chart > MEMORY > IDENTITY).
 
+## Reality sync
+
+After structural checks, verify persona files match the latest real state by reviewing the last 24h of activity:
+
+**Sources to check:**
+- `memory_search` — query for the agent's own name, role, recent decisions, corrections, rule changes
+- Latest `memory/YYYY-MM-DD.md` files — read the most recent 1-2 daily memory files
+- `sessions_history` — scan recent session messages for decisions or corrections not yet captured
+
+**What to look for:**
+- New durable facts: role changes, new responsibilities, updated collaboration relationships
+- Boss corrections or feedback that change how the agent should operate
+- New standing rules discovered during work (e.g. "this project uses pnpm not npm")
+- Updated tool paths, environment details, or credentials scope
+- Organizational changes visible via `company_org_list`
+
+**Action:** update the relevant persona file to reflect the current truth. If a session/memory item is dated and project-specific, it belongs in `memory/` not in persona files — but if it changes a durable fact, the persona file must be updated to match.
+
 ## Workspace cleanliness
 
 Root should contain only:
