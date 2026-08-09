@@ -85,8 +85,7 @@
 2. **配置切换文档化**：架构师把 volcengine-agent → volcengine-token 写入配置，
    但 setup/ 目录的嵌入 provider 文档未同步更新。
    → 建议：双线维护原则要求同步 `setup/` 文档；下个治理任务周期处理。
-3. **本地代理依赖**：当前依赖本地代理 127.0.0.1:8791（launchd 守护 PID 11388）。
-   → 建议：setup 文档应记录代理故障时的 fallback 路径。
+3. **本地代理非常驻（架构师验收时发现的新缺陷）**：原报告 §"残留观察 3" 误将代理标为 launchd 守护，实际为 nohup 启动、无 plist。详细整改项见阶段2 重建报告 §"新增整改项"，由架构师落地 launchd plist（含 KeepAlive），治理岗同步更新 setup/ 文档。
 
 ## 出处索引
 

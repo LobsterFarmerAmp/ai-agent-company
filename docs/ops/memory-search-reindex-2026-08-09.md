@@ -69,9 +69,38 @@ Memory reindex lock is held at
 - **陈旧 reindex-lock 文件**：8/8 agent 都存在 `*.reindex-lock.sqlite`（mtime 8/7 23:03），
   这是阶段1 status --index 探测遗留的，无人持锁真实 reindex，不影响功能。
   → 可作治理项清理由后续统一 cleanup 脚本处理。
-- **代理进程长稳运行**：PID 11388 PPID=1（launchd），自动重启策略由架构师负责。
+- **代理进程长稳运行（事实更正，详见 §新增整改项）**：原报告误标"PID 11388 PPID=1（launchd）"。
+  实际为 `nohup` 启动，**无 launchd plist 守护**——gateway 重启会连带杀掉代理。
+  → 见 §新增整改项：必须由架构师落地正式 launchd 常驻（含 KeepAlive）。
 - **token 计费** vs Coding Plan：本次切换到 token 计费，避免 Coding Plan 周配额 429。
   新 key（ark-18e...42833）走方舟 endpoint，非订阅配额。
+
+## 新增整改项（架构师验收后追加 · 2026-08-09 11:51）
+
+### 缺陷：本地代理非常驻，每次 gateway 重启后 memory_search 复发不可用
+
+**根因**：
+- 代理进程（`~/.openclaw/bin/doubao-embedding-proxy.js`）由 `nohup` 启动，**未注册 launchd plist**
+- 本机 `~/Library/LaunchAgents/` 无对应 plist
+- PPID=1 在 macOS 上是 nohup 进程被 init 收养后的常见表象，**不是** launchd 守护的证据
+  （治理岗原报告误用此单一信号下结论，详见 ERR-20260809-001 / LRN-20260809-002）
+
+**风险**：
+- 任何 gateway 重启 / 机器重启 → 代理被杀 → 8/8 agent memory_search 全部再次 paused
+- 全员 memory_search 不可用，触发 ERR-20260808-001 同款症状
+- 治理岗报告里 §"残留观察 3"（setup 文档记录 fallback 路径）治标不治本——核心是代理本身不常驻
+
+**必须由架构师落地的整改**：
+1. 编写 `~/Library/LaunchAgents/com.ai-agent-company.doubao-embedding-proxy.plist`
+   （含 `KeepAlive=true`、`RunAtLoad=true`、`ThrottleInterval=10`、环境变量 `ARK_EMBEDDING_KEY` 从 Keychain 注入）
+2. `launchctl load -w <plist>` 注册
+3. 重启 gateway 实测代理自动拉起
+4. setup/ 文档同步：嵌入 provider 章节补充 launchd plist 治理要求（含 plist 路径、label、环境变量、KeepAlive 语义）
+
+**治理岗配合项**：
+- 双线维护：架构师 plist 落地后，治理岗同步更新 `~/.openclaw/company/ai-agent-company/setup/` 文档
+- 验证项：重启 gateway 后实测 `curl 127.0.0.1:8791/health` + 8/8 agent memory_search 探针
+- 报告状态：本次报告待整改完成后归档
 
 ## 附：阶段2 验收任务 1570c23d 启动条件
 
