@@ -21,6 +21,7 @@
 | `agent-setup-guide.md` | Agent 配置通用操作规程（命名、workspace、注册、验证） |
 | `coding-agent.md` | Coding Agent 配置（Claude Code 2.1.71 + DeepSeek V4 Flash） |
 | `company-os.md` | Company OS 插件能力与部署约定（对齐 v0.7.0） |
+| `avatars.md` | 头像与私有资产约定（主库位置、唯一性、禁止入库） |
 
 ## 更新原则
 
