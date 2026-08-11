@@ -13,7 +13,7 @@ const HARD_RULES_MARKER = "## 0. 技能读取原则";
 
 /**
  * Prepends company hard rules from the public company-info directory
- * into every agent's AGENTS.md workspace bootstrap file, including main.
+ * into every agent's AGENTS.md workspace bootstrap file.
  */
 const handler = async (event) => {
   if (event.type !== "agent" || event.action !== "bootstrap") {

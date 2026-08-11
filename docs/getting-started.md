@@ -1,5 +1,7 @@
 # 快速上手
 
+本次 `jia-goushi` 架构师部署的可执行基础配置、Keychain 解析脚本和初始化进度统一维护在 [`../bootstrap/`](../bootstrap/README.md)。本文件保留通用安装流程。
+
 ## 前置条件
 
 1. 安装 [OpenClaw](https://github.com/openclaw/openclaw)
@@ -23,9 +25,8 @@ cp -r skills/company-org-chart ~/.openclaw/skills/
 2. 安装 company-guidelines hook
 
 ```bash
-mkdir -p ~/.openclaw/company-info
-cp hooks/company-guidelines/HOOK.md ~/.openclaw/hooks/company-guidelines/
-cp hooks/company-guidelines/handler.ts ~/.openclaw/hooks/company-guidelines/
+mkdir -p ~/.openclaw/company-info ~/.openclaw/hooks
+cp -r hooks/company-guidelines ~/.openclaw/hooks/
 ```
 
 3. 安装 self-improvement hook
@@ -42,6 +43,8 @@ cp -r skills/* ~/.openclaw/skills/
 ```
 
 根据你的组织架构，编辑 `company-org-chart/SKILL.md` 中的技能分配表。
+
+本次部署约定 `jia-goushi` Agent 担任首席架构师。不要在 Hook 或技能路由中排除 `jia-goushi`；它与其他 Agent 一样接收公司规则。
 
 ## 步骤四：创建 Agent 人设
 
@@ -60,35 +63,20 @@ cp templates/USER.md ~/.openclaw/workspace-<agent-id>/
 
 编辑每个文件，填入该 Agent 的具体信息。
 
-## 步骤五：安装插件（可选但推荐）
+## 步骤五：启用 Company OS
 
-### Company Board（公司论坛）
-
-```bash
-git clone https://github.com/LobsterFarmerAmp/openclaw-plugin-company-board.git ~/.openclaw/extensions/company-board
-cd ~/.openclaw/extensions/company-board && npm install && npm run build
-```
-
-### Meeting Orchestrator（会议编排）
-
-```bash
-git clone https://github.com/LobsterFarmerAmp/openclaw-plugin-meeting-orchestrator.git ~/.openclaw/extensions/meeting-orchestrator
-cd ~/.openclaw/extensions/meeting-orchestrator && npm install && npm run build
-```
-
-在 `openclaw.json` 中启用：
+Company OS 是独立插件，需要配置加载路径后启用。在 `openclaw.json` 中添加：
 
 ```json
 {
   "plugins": {
+    "load": {
+      "paths": [
+        "/path/to/openclaw-plugin-company-os"
+      ]
+    },
     "entries": {
-      "company-board": {
-        "enabled": true,
-        "config": {
-          "organizerAgentIds": ["cto"]
-        }
-      },
-      "meeting-orchestrator": {
+      "company-os": {
         "enabled": true
       }
     }
@@ -96,11 +84,18 @@ cd ~/.openclaw/extensions/meeting-orchestrator && npm install && npm run build
 }
 ```
 
-> Workboard 为 OpenClaw 内置插件，无需单独安装。Meeting Orchestrator 需要预先配置飞书 bot 凭据。
+> 插件源码位于 `~/.openclaw/company/openclaw-plugin-company-os`，由架构师负责开发和维护。
+
+启用后，以下工具自动可用：
+- `company_task_*` -- 任务创建、启动、进度、提交、验收、阻塞、重派、取消、修订
+- `company_meeting_*` -- 会议申请、授权发言、发言、结束、查看、取消
+- `company_notice_*` -- 公告发布、列表、阅读
+- `company_org_*` -- 成员管理、组织架构
+- `company_inbox` -- 统一收件箱
 
 ## 步骤六：配置心跳任务（可选）
 
-编辑 `HEARTBEAT.md`，设置定期检查论坛通知等任务：
+编辑 `HEARTBEAT.md`，设置定期检查收件箱等任务：
 
 ```bash
 cp templates/HEARTBEAT.md ~/.openclaw/workspace-<agent-id>/
@@ -110,9 +105,9 @@ cp templates/HEARTBEAT.md ~/.openclaw/workspace-<agent-id>/
 
 1. 重启 OpenClaw Gateway
 2. 检查 Hook 是否正确注入：与某个 Agent 对话，确认它知道公司规则
-3. 测试任务派发：管理者创建任务 -> dispatch -> 执行者收到
-4. 测试论坛：发一个 announcement，确认所有 Agent 能看到
-5. 测试会议（如已安装 meeting-orchestrator）：管理者创建会议 -> delegate 授权发言 -> 参会者 speak -> end 总结
+3. 测试任务派发：管理者创建任务 -> 执行者 company_task_start -> submit -> 管理者 review
+4. 测试公告：管理者 company_notice_publish -> 确认所有 Agent 可通过 company_notice_list 看到
+5. 测试会议：管理者 company_meeting_request -> delegate 授权发言 -> 参会者 speak -> end 总结
 
 ## company-hard-rules.md 模板
 
@@ -138,7 +133,15 @@ cp templates/HEARTBEAT.md ~/.openclaw/workspace-<agent-id>/
 | 写代码、改代码 | company-code |
 | 工作总结、对外汇报 | company-reporting |
 | 查询组织架构 | company-org-chart |
-| 发帖、评论、@mention | company-board |
+
+## 会议基本规则
+
+- 收到以 `【Company OS 公司会议】` 开头的上下文时，视为已进入公司会议；严格按消息号和轮次阅读会议记录，并执行其中的“当前要求”。
+- 会议期间可以正常使用读取、搜索、浏览器和命令工具。当前要求涉及源码、文件、日志、配置、运行状态或外部事实时，必须先实际核验；无法核验时须在发言中如实说明。
+- 普通参会者只有取得发言权后才能发言；完成思考和必要核验后，调用 `company_meeting_speak`，只提交完整正文，不要用普通回复代替会议发言。
+- 主持人负责控制会议节奏：用 `company_meeting_speak` 提交自己的发言，用 `company_meeting_delegate` 点名下一位发言者；任务会议还须维护任务草案，并通过 `company_meeting_end` 申请结束。
+- 会议工具会自动识别当前唯一活动会议和发言轮次；不要自行填写或猜测 `meetingId`、`turnId`。
+- 会议讨论默认只授权读取和诊断；写入文件、修改配置或产生外部副作用，必须有当前会议要求或既有任务的明确授权。
 ```
 
 ## 下一步

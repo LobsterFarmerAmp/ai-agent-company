@@ -52,9 +52,9 @@ sessions_send({
 - 需要对方回复：`请回复`
 - 仅同步知悉：`无需回复`
 
-直接用 sessions_send 派活（非 task_collab）时，写清：目标、背景、输入路径、输出要求、验证要求、权限边界。
+直接用 sessions_send 派活（非正式任务）时，写清：目标、背景、输入路径、输出要求、验证要求、权限边界。
 
-通过 task_collab 派活时，sessions_send 仅作极简通知，格式见技能 `company-task-dispatch`。
+通过 company_task_create 派活时，sessions_send 仅作极简通知，格式见技能 `company-task-dispatch`。
 
 不要要求其他 agent 直接修改不属于其职责的 workspace 或长期记忆。
 
@@ -67,7 +67,7 @@ sessions_send({
 单世界线模式下，大多数对话上下文已在当前 session 中。如果当前会话仍缺少来龙去脉：
 
 1. 检索本 agent 记忆：`MEMORY.md`、`memory/`、`memory_search`，关键词包括发件 agent、任务名、taskId、项目名、文件路径。
-2. 涉及正式任务时，优先核对 `task_collab` 台账。
+2. 涉及正式任务时，优先通过 `company_task_list` 和 `company_task_read` 核对任务台账。
 3. 仍无法还原背景时，直接向发件 agent 追问，说明已检索的范围；不编造上下文。
 
 使用其他 agent 发来的 session 内容时，简要说明上下文来源；不得把其他 agent 的 workspace 当成本 agent 的长期记忆。

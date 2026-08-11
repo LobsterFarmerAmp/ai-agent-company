@@ -1,97 +1,114 @@
 ---
 name: "company-task-dispatch"
-description: "任务派发规则：workboard_create创建、workboard_dispatch调度、workboard_complete验收"
+description: "任务派发规则：company_task_create创建、company_task_review验收、company_task_revise修订"
 ---
 
 # 任务派发规则
 
 触发条件：创建公司任务、向其他 agent 正式派活、需要验收的交付。
 
-> 通用论坛操作（announcement / discussion / comment / inbox）参见技能 `company-board`。
+> 通用对话规则参见技能 `company-dialogue`。
 > 任务执行者应使用技能 `company-task-execution`。
 
-## 创建任务卡片
+## 创建任务
 
 ```
-workboard_create({
-  title:       string（必填，一句话任务标题）
-  notes:       string（可选，详细说明、要求、边界、交付规范）
-  agentId:     string（可选，指定执行者）
-  priority:    "low" | "normal" | "high" | "urgent"（可选，默认 normal）
-  parents:     string[]（可选，依赖的父卡片 id 列表）
-  boardId:     string（可选，指定看板，默认 default）
+company_task_create({
+  parentId:           string（必填，父任务 ID）
+  assigneeId:         string（必填，直属下属 Agent ID）
+  title:              string（必填，一句话任务标题）
+  description:        string（必填，详细说明、要求、边界）
+  acceptanceCriteria: string（必填，验收标准）
 })
 ```
 
-- 不再使用 `board_post` 派发任务
-- `notes` 中应包含完整的工作要求、交付边界和验收标准
-- `parents` 用于声明依赖关系，父卡片完成后子卡片才可调度
-- 任务卡片创建后处于 `pending` 状态，等待调度
+- 任务只能由父任务负责人向自己的直属下属创建
+- Agent 不能创建根任务（根任务由 Boss 在系统外发起）
+- 任务创建后为 `assigned` 状态，等待执行者 start
 
-## 细化粗糙任务
+## 修订任务
 
 ```
-workboard_specify({
-  cardId:  string（必填，卡片 id 或前缀）
-  notes:   string（必填，补充的任务说明）
+company_task_revise({
+  taskId:             string（必填）
+  reason:             string（必填，修订原因）
+  title:              string（可选）
+  description:        string（可选）
+  acceptanceCriteria: string（可选）
 })
 ```
 
-- 当任务描述不够清晰时，用 `workboard_specify` 补充细节
-- 可以多次追加，每次追加会累积到卡片的 notes 中
+- 可修订未关闭、非 review 状态的任务
+- 每次修订产生新版本，保留历史
 
-## 分解复杂任务
+## 重派任务
 
 ```
-workboard_decompose({
-  cardId:   string（必填，父卡片 id）
-  children: [{ title: string, notes?: string, agentId?: string, priority?: string }]（必填，子任务列表）
+company_task_reassign({
+  taskId:       string（必填）
+  assigneeId:   string（必填，新的直属下属 Agent ID）
+  reason:       string（必填，重派原因）
 })
 ```
 
-- 将一个大任务拆分为多个子任务
-- 子任务自动设置 `parents` 指向父卡片
-- 父卡片在所有子卡片完成前不会被直接调度
+- 将任务重新指派给自己的另一名直属下属
 
-## 执行调度
+## 取消任务
 
 ```
-workboard_dispatch({})
-```
-
-- 自动执行调度：提升可执行的 pending 卡片、回收超时卡片、启动 subagent 执行
-- 调度结果返回 started / promoted / blocked / startFailures 列表
-- 通常在创建任务卡片后调用，也可定期调用以推进停滞的卡片
-
-## 验收完成
-
-```
-workboard_complete({
-  id:       string（必填，卡片 id 或前缀）
-  token:    string（必填，claim token）
-  summary:  string（必填，完成摘要）
-  proof:    object（必填，交付证明）
-  artifacts: [{ name: string, path: string }]（可选，交付物列表）
+company_task_cancel({
+  taskId:   string（必填）
+  reason:   string（必填，取消原因）
 })
 ```
 
-- **complete 前必审核**：务必先 `workboard_read` 查看卡片详情和执行者提交的 proof，确认合格后再 complete
-- 提交 proof 后任务状态变为 `review`，organizer 审核后 complete
-- 一旦 complete，任务状态变为 `done`，不可撤销
+- 存在活动子任务时拒绝取消
+- 不级联取消子任务
 
-## 通知订阅
+## 验收任务
+
+**验收前必须先读取任务详情和执行者提交的证据：**
 
 ```
-workboard_notify_subscribe({
-  cardId:  string（必填，卡片 id）
-  events:  string[]（可选，订阅的事件类型列表）
+company_task_read({
+  taskId:   string（必填）
 })
 ```
 
-- 订阅卡片事件通知（如 claim、complete、block 等）
-- 使用 `workboard_notify_events` 查看未读事件
-- 使用 `workboard_notify_advance` 标记事件已读
+- 返回任务详情、版本历史、进度记录、提交的证据和审计日志
+- 仔细审查 summary 和 evidence，逐项确认交付成果
+
+**验收决策：**
+
+```
+company_task_review({
+  taskId:    string（必填）
+  decision:  "accept" | "reject"（必填）
+  feedback:  string（可选，reject 时建议附带反馈）
+})
+```
+
+- **accept**：任务关闭（closed），不可撤销
+- **reject**：任务退回 in_progress，附反馈让执行者继续
+
+## 查看任务
+
+```
+company_task_list({})
+```
+
+- 查看你的责任树中的多级任务、子任务计数和阻塞/停滞风险
+
+```
+company_task_read({ taskId })
+```
+
+- 读取任务详情、版本、进度、proof 和审计
 
 ## 方案审阅
 
-方案审阅不再使用任务系统。创建 discussion 帖（参见 `company-board` 技能），审阅人在评论区给意见。
+方案审阅不再使用任务系统。需要多方讨论时使用 `company_meeting_request` 创建讨论会，或通过 `sessions_send` 异步沟通。
+
+## 通知
+
+通过 `company_inbox` 查看与你有关的任务验收、风险和新任务。通过 `company_task_list` 查看责任树全貌。

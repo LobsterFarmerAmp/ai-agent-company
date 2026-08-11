@@ -1,0 +1,140 @@
+{
+  "gateway": {
+    "mode": "local",
+    "auth": {
+      "mode": "token",
+      "token": {
+        "source": "exec",
+        "provider": "macos_keychain_openclaw_gateway",
+        "id": "value"
+      }
+    }
+  },
+  "secrets": {
+    "providers": {
+      "macos_keychain_volcengine": {
+        "source": "exec",
+        "command": "/Users/<macos-user>/.openclaw/bin/openclaw-keychain-volcengine",
+        "passEnv": ["HOME"],
+        "jsonOnly": false
+      },
+      "macos_keychain_volcengine_agent": {
+        "source": "exec",
+        "command": "/Users/<macos-user>/.openclaw/bin/openclaw-keychain-volcengine-agent",
+        "passEnv": ["HOME"],
+        "jsonOnly": false
+      },
+      "macos_keychain_openclaw_gateway": {
+        "source": "exec",
+        "command": "/Users/<macos-user>/.openclaw/bin/openclaw-keychain-openclaw-gateway",
+        "passEnv": ["HOME"],
+        "jsonOnly": false
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "volcengine-plan": {
+        "baseUrl": "https://ark.cn-beijing.volces.com/api/coding/v3",
+        "apiKey": {
+          "source": "exec",
+          "provider": "macos_keychain_volcengine",
+          "id": "value"
+        },
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "glm-5.2",
+            "name": "GLM-5.2",
+            "reasoning": true,
+            "input": ["text"],
+            "contextWindow": 1000000,
+            "maxTokens": 128000,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            }
+          }
+        ]
+      },
+      "volcengine-agent": {
+        "baseUrl": "https://ark.cn-beijing.volces.com/api/plan/v3",
+        "apiKey": {
+          "source": "exec",
+          "provider": "macos_keychain_volcengine_agent",
+          "id": "value"
+        },
+        "api": "openai-responses",
+        "models": [
+          {
+            "id": "glm-5.2",
+            "name": "GLM-5.2",
+            "reasoning": true,
+            "input": ["text"],
+            "contextWindow": 1000000,
+            "maxTokens": 128000,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            }
+          },
+          {
+            "id": "doubao-seed-2.0-pro",
+            "name": "Doubao Seed 2.0 Pro",
+            "reasoning": true,
+            "input": ["text", "image"],
+            "contextWindow": 262144,
+            "maxTokens": 128000,
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            }
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "imageModel": {
+        "primary": "volcengine-agent/doubao-seed-2.0-pro"
+      },
+      "models": {
+        "volcengine-plan/glm-5.2": {
+          "params": {
+            "thinking": "high"
+          }
+        },
+        "volcengine-agent/glm-5.2": {
+          "params": {
+            "thinking": "high"
+          }
+        },
+        "volcengine-agent/doubao-seed-2.0-pro": {
+          "params": {
+            "thinking": "high"
+          }
+        }
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "default": true,
+        "name": "<agent-name>",
+        "workspace": "/Users/<macos-user>/.openclaw/workspace",
+        "model": {
+          "primary": "volcengine-plan/glm-5.2",
+          "fallbacks": ["volcengine-agent/glm-5.2"]
+        }
+      }
+    ]
+  }
+}
