@@ -79,7 +79,7 @@ openai-compatible embeddings failed: HTTP 429: AccountQuotaExceeded
 多个 agent 报告：
 ```
 Memory reindex lock is held at
-  /Users/amphilagusgu/.openclaw/agents/<ag>/agent/openclaw-agent.sqlite.reindex-lock.sqlite;
+  ~/.openclaw/agents/<ag>/agent/openclaw-agent.sqlite.reindex-lock.sqlite;
   another reindex is active.
 ```
 

@@ -49,7 +49,7 @@
 
 ```
 Memory reindex lock is held at
-  /Users/amphilagusgu/.openclaw/agents/<ag>/agent/openclaw-agent.sqlite.reindex-lock.sqlite;
+  ~/.openclaw/agents/<ag>/agent/openclaw-agent.sqlite.reindex-lock.sqlite;
   another reindex is active.
 ```
 
