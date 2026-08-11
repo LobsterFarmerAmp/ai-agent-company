@@ -4,8 +4,9 @@
 
 ## 是什么
 
-`company-os` 是 OpenClaw 原生独立插件，把公司治理收敛到一套共享基础设施和三类业务对象：**会议、严格层级任务、公司公告**。Boss 在统一 WebUI 操作，Agent 只能通过 `company_*` 工具参与。
+`company-os` 是**自研的 OpenClaw 独立插件**（非 OpenClaw 内置/官方，代码由我们维护在 `~/.openclaw/company/openclaw-plugin-company-os`），把公司治理收敛到一套共享基础设施和三类业务对象：**会议、严格层级任务、公司公告**。Boss 在统一 WebUI 操作，Agent 只能通过 `company_*` 工具参与。
 
+- **自研**：git 作者均为 `amphilagus`，从零开发，非 OpenClaw 官方项目产物。
 - 独立插件，通过 `plugins.load.paths` 加载（不是 OpenClaw 内置插件）。
 - 数据落 `company-os.sqlite`（默认 `~/.openclaw/plugins/company-os/company-os.sqlite`）。
 - 前端 React + Vite，三个真实路由：`meeting-room`（会议室）、`tasks`（任务树）、`notices`（告示板）。
