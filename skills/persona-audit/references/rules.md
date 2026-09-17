@@ -70,6 +70,17 @@ Test: would this still matter if the agent switched projects? If not, move it ou
 
 Contradictions: fix in favor of the authoritative source (org-chart > MEMORY > IDENTITY).
 
+## Budget measurement
+
+Measure `MEMORY.md` against its 60-line budget by **agent-authored content only**: stop counting at the first `## Promoted From Short-Term Memory` heading. The marked legacy-keywords block counts toward the budget (keep it ≤ 8 lines).
+
+Machine-managed regions are excluded from both the budget and the legacy-keyword check:
+
+- `## Promoted From Short-Term Memory (...)` sections and their `<!-- openclaw-memory-promotion:... -->` comments (dreaming automation).
+- Hook-injected company hard rules.
+
+Report the machine-region line count separately (e.g. `24/60 durable + 55 machine`). Clean the machine regions with the `memory-budget-cleanup` skill when a single file holds more than 20 such lines or more than 2 dated promotion sections.
+
 ## Legacy-narrative keyword check
 
 When checking a persona file set for software-era residue, scan for the legacy keyword set:
