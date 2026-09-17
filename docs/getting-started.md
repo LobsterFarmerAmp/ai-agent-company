@@ -51,13 +51,12 @@ cp -r skills/* ~/.openclaw/skills/
 为每个 Agent 创建 workspace，使用 `templates/` 下的模板：
 
 ```bash
-# 为每个 agent 创建 6 个核心文件
+# 为每个 agent 创建 5 个核心文件（TOOLS.md 已废止，不创建）
 mkdir -p ~/.openclaw/workspace-<agent-id>
 cp templates/AGENTS.md ~/.openclaw/workspace-<agent-id>/
 cp templates/SOUL.md ~/.openclaw/workspace-<agent-id>/
 cp templates/IDENTITY.md ~/.openclaw/workspace-<agent-id>/
 cp templates/MEMORY.md ~/.openclaw/workspace-<agent-id>/
-cp templates/TOOLS.md ~/.openclaw/workspace-<agent-id>/
 cp templates/USER.md ~/.openclaw/workspace-<agent-id>/
 ```
 

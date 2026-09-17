@@ -90,15 +90,14 @@ OpenClaw 独立插件，需要通过 `plugins.load.paths` 加载后启用，统�
 
 ### 5. 人设治理层
 
-每个 Agent 拥有 6 个核心文件 + 2 个辅助文件：
+每个 Agent 拥有 5 个核心文件 + 2 个辅助文件（`TOOLS.md` 已废止，其内容并入 `AGENTS.md` 的 `## Tools` 段）：
 
 | 文件 | 作用 | 目标行数 |
 |------|------|---------|
-| AGENTS.md | 规则路由器 + workspace 说明 | ≤40 行（不含注入） |
+| AGENTS.md | 规则路由器 + workspace 说明 + `## Tools`（工具路径/命令） | ≤90 行（含 `## Tools`） |
 | SOUL.md | 人格、判断风格、协作语气、边界 | ≤35 行 |
 | IDENTITY.md | 姓名、ID、职位、等级、上级 | ≤15 行 |
 | MEMORY.md | 长期记忆：职责、协作关系、铁律 | ≤60 行 |
-| TOOLS.md | 本地工具路径、常用命令 | ≤40 行 |
 | USER.md | 服务对象信息 | ≤15 行 |
 | HEARTBEAT.md | 心跳任务清单 | 按需 |
 | memory/*.md | 日常记忆片段 | 按需 |

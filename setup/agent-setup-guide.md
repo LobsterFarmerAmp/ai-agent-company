@@ -29,9 +29,8 @@ mkdir -p ~/.openclaw/workspace-<agent-id>/memory
 |------|------|----------|
 | `IDENTITY.md` | 身份信息 | 姓名、Agent ID、职位、等级、上级 |
 | `SOUL.md` | 人格定义 | Core、Judgment、Collaboration、Boundaries |
-| `AGENTS.md` | 工作区说明 | Governance、Startup、Operating Rules |
+| `AGENTS.md` | 工作区说明 + `## Tools` | Governance、Startup、Operating Rules、Tools（原 TOOLS.md 内容） |
 | `MEMORY.md` | 长期记忆 | Durable Facts、Cross-Agent、Standing Rules、Hard Rules |
-| `TOOLS.md` | 工具笔记 | Key Paths、Useful Commands、Operating Notes |
 | `USER.md` | Boss 信息 | Name、称呼、Role、Timezone、Context |
 | `HEARTBEAT.md` | 心跳模板 | 默认只放注释，保持关闭 |
 
