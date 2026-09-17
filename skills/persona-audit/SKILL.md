@@ -13,6 +13,7 @@ Use when Boss asks an agent to audit and simplify its own persona files.
 - Before auditing, read `~/.openclaw/company-info/company-hard-rules.md` and `~/.openclaw/hooks/company-guidelines/HOOK.md` to know what is hook-injected.
 - Use `company_org_list` as the authoritative org source for consistency checks.
 - `main` is never in scope.
+- Never recreate `TOOLS.md`: the 2026-09-16 platform migration archives it into `AGENTS.md §Tools`; audit its content there (see `references/rules.md`).
 
 ## References
 
@@ -22,7 +23,7 @@ Load when running this skill:
 
 ## Workflow
 
-1. Read your six persona files: `AGENTS.md`, `SOUL.md`, `IDENTITY.md`, `MEMORY.md`, `TOOLS.md`, `USER.md`.
+1. Read your five persona files: `AGENTS.md` (including the migrated `## Tools` section), `SOUL.md`, `IDENTITY.md`, `MEMORY.md`, `USER.md`. Treat a reappearing `TOOLS.md` as a migration artifact to fold into `AGENTS.md`, not a file to maintain.
 2. Note `HEARTBEAT.md` / `DREAMS.md` anomalies only; they are not primary persona files.
 3. Count current lines/bytes for each file.
 4. List workspace-root files/directories, excluding `.git`, `.openclaw`, `memory/`, `skills/`, `avatars/`.

@@ -7,8 +7,8 @@ Budgets are guidance, not hard truncation. Exceed only when there is a clear ope
 - `IDENTITY.md`: ≤ 15 lines
 - `USER.md`: ≤ 15 lines
 - `SOUL.md`: ≤ 35 lines
-- `AGENTS.md`: ≤ 40 lines, excluding hook-injected company hard rules
-- `TOOLS.md`: ≤ 40 lines
+- `AGENTS.md`: ≤ 90 lines, excluding hook-injected company hard rules. Since the 2026-09-16 platform migration, `openclaw doctor --fix` archives `TOOLS.md` into the `## Tools` section of `AGENTS.md`; the historical 40+40 content budget is unchanged and roughly 10 of the lines are merge framing. Keep net-zero growth: new lines must displace equal lines.
+- `TOOLS.md`: retired — do not recreate it; the platform re-archives it. Audit its former content under `AGENTS.md §Tools`.
 - `MEMORY.md`: ≤ 60 lines for durable facts/rules; move dated history to `memory/`
 
 ## Per-file rules
@@ -39,9 +39,7 @@ Remove: agent self-description, behavior instructions, workflow rules, technical
 
 ### TOOLS.md
 
-Keep: critical paths, commands actually used, short durable gotchas.
-
-Remove: long warnings, domain knowledge, detailed SOPs, plaintext secrets.
+Retired by the platform: do not create or restore it. Verify the former content still exists under `AGENTS.md §Tools` (critical paths, commands actually used, short durable gotchas); if a durable note is missing, add it there and stay within the AGENTS.md budget. A reappearing `TOOLS.md` is a migration artifact — fold it into `AGENTS.md`, do not maintain it.
 
 ### MEMORY.md
 
@@ -66,7 +64,7 @@ Test: would this still matter if the agent switched projects? If not, move it ou
 |---|---|
 | IDENTITY ↔ SOUL | Role and boundaries match? |
 | AGENTS ↔ MEMORY | Governance and collaboration facts match? |
-| TOOLS ↔ MEMORY | Paths and commands match? |
+| AGENTS §Tools ↔ MEMORY | Paths and commands match? |
 | USER ↔ `company_org_list` | Reporting relationship correct? |
 | MEMORY ↔ `company_org_list` | Agent IDs, levels, reporting lines match? |
 
@@ -94,7 +92,7 @@ After structural checks, verify persona files match the latest real state by rev
 
 Root should contain only:
 
-- **Allowed files**: `AGENTS.md`, `SOUL.md`, `IDENTITY.md`, `MEMORY.md`, `TOOLS.md`, `USER.md`, `HEARTBEAT.md` (if used)
+- **Allowed files**: `AGENTS.md`, `SOUL.md`, `IDENTITY.md`, `MEMORY.md`, `USER.md`, `HEARTBEAT.md` (if used)
 - **Allowed dirs**: `memory/`, `skills/`, `avatars/`, `hooks/` (if agent owns local hooks), intentional project dirs
 
 Everything else: move, archive, or delete. Do not move cross-agent project directories without Boss coordination.
