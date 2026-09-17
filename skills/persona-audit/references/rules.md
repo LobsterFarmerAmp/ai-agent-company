@@ -70,6 +70,16 @@ Test: would this still matter if the agent switched projects? If not, move it ou
 
 Contradictions: fix in favor of the authoritative source (org-chart > MEMORY > IDENTITY).
 
+## Legacy-narrative keyword check
+
+When checking a persona file set for software-era residue, scan for the legacy keyword set:
+`超人计划` / `superman-plan` / `pnpm` / `monorepo` / `卡路里` / `calorie` / `实机体验平台` / `自主调试平台` / `agent-engine` / `Expo` / `drizzle`.
+
+- **Only whitelisted span**: in `MEMORY.md` only, the block between `<!-- legacy-keywords:start -->` and `<!-- legacy-keywords:end -->` (the 检索守则 / 思想钢印 block). Keywords inside that span are intentional — they exist so `memory_search` can hit stale references — and must NOT be reported as residue.
+- A missing, unclosed, duplicated, or misplaced whitelist span is itself a finding.
+- Everything outside the whitelist span is zero-tolerance residue.
+- The block counts against the `MEMORY.md` budget (≤ 60 lines); keep it ≤ 8 lines.
+
 ## Reality sync
 
 After structural checks, verify persona files match the latest real state by reviewing the last 24h of activity:
