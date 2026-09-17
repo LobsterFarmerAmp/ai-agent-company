@@ -29,8 +29,10 @@ Load when running this skill:
 4. List workspace-root files/directories, excluding `.git`, `.openclaw`, `memory/`, `skills/`, `avatars/`.
 5. Apply `references/rules.md`.
 6. **Sync with reality**: search recent 24h session history and `memory/*.md` files for decisions, corrections, role changes, new standing rules, or updated facts that should be reflected in persona files. Use `memory_search` and read the latest `memory/YYYY-MM-DD.md`.
-7. **Directly edit** persona files: trim over-budget content, remove hook duplication, resolve cross-file contradictions, incorporate reality-sync findings, clean up workspace.
-8. Report what was changed.
+7. **Route to own role requirements**: from `company_org_list`, read your own `title`. Load `~/.openclaw/company-info/role-requirements/<role-key>.md` (list the dir; the file name should match your title — `cto.md`, `architect.md`, etc.; `_template.md` is the skeleton, not a role). If no file exists for your role, note it as a gap (log to `.learnings/FEATURE_REQUESTS.md`) and skip.
+8. **Check role gaps**: run the loaded doc's `Self-Audit 检查清单` against your persona files — verify each required dynamic state (e.g. `Direct Reports`, current task/攻坚 status) is actually carried in `MEMORY.md`/daily notes and not stale, and each behavioral requirement is reflected. Report every gap ("role requires X, persona carries Y") as a finding; fix in-scope gaps directly.
+9. **Directly edit** persona files: trim over-budget content, remove hook duplication, resolve cross-file contradictions, incorporate reality-sync + role-gap findings, clean up workspace.
+10. Report what was changed.
 
 ## Output
 

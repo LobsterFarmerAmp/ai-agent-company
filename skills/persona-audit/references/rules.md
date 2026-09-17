@@ -39,7 +39,7 @@ Remove: agent self-description, behavior instructions, workflow rules, technical
 
 ### TOOLS.md
 
-Retired by the platform: do not create or restore it. Verify the former content still exists under `AGENTS.md §Tools` (critical paths, commands actually used, short durable gotchas); if a durable note is missing, add it there and stay within the AGENTS.md budget. A reappearing `TOOLS.md` is a migration artifact — fold it into `AGENTS.md`, do not maintain it.
+Retired by the platform: do not create or restore it. Verify the former content still exists under `AGENTS.md §Tools` (critical paths, commands actually used, short durable gotchas); if a durable note is missing, add it there and stay within the AGENTS.md budget. A reappearing `TOOLS.md` is a migration artifact — fold it into `AGENTS.md`, do not maintain it. When folding it in, keep critical paths/commands/short gotchas and drop long warnings, domain knowledge, detailed SOPs, and plaintext secrets.
 
 ### MEMORY.md
 
