@@ -1,7 +1,7 @@
 # 技能安装
 
 > 配置日期：2026-08-04  
-> 更新日期：2026-08-06  
+> 更新日期：2026-09-19  
 > 执行者：架构师
 
 ## 已安装技能
@@ -11,8 +11,10 @@
 - **来源**：ClawHub `@pskoett/self-improving-agent`
 - **功能**：记录教训、错误、纠正，形成持续改进闭环
 - **安装方式**：`openclaw skills install @pskoett/self-improving-agent`
+- **谱系**：**upstream（上游安装）**，canonical = ClawHub registry；live 侧含 `.clawhub/origin.json` + sha256，升级只走 clawhub。
 
-与项目 `skills/self-improvement/` 本地版本（4.0.0）的差异：
+与仓内 `skills/self-improvement/`（4.0.0）的差异：
+- 仓内副本 = **repo-only / 冻结**；系上游 v4.0.0 的**改名 fork**，**不得覆盖 live 上游 `self-improving-agent`**（clawhub pskoett v4.0.1）。将来若推进其 python 移植，须**换名另行立项**。
 - ClawHub 4.0.1 是 OpenClaw 专用版，移除了多平台支持
 - 多了 hooks（session-end 错误扫描 + bootstrap 提醒）
 - 多了 assets 模板和 CHANGELOG
@@ -23,6 +25,7 @@
 - **来源**：ClawHub `@gzlicanyi/imap-smtp-email`
 - **功能**：通过 IMAP/SMTP 收发邮件，支持多邮箱服务商
 - **安装方式**：`openclaw skills install @gzlicanyi/imap-smtp-email`
+- **谱系**：**upstream（上游安装）**，live-only，仓内无对应副本。
 - **安全扫描**：clean（静态扫描 + VirusTotal 均通过）
 - **配置文件**：`~/.config/mail-skills/.env`（权限 600）
 
@@ -32,6 +35,13 @@
 - **功能**：将编码任务委派给 Claude Code 等 coding agent
 - **安装方式**：随 OpenClaw 捆绑，无需额外安装
 - **配置详情**：见 [`coding-agent.md`](coding-agent.md)
+
+### persona-audit（owned）
+
+- **来源**：公司自研
+- **谱系**：**owned（自研）**，canonical = 部署仓 `skills/persona-audit`；部署 repo→live 前先 `diff -r` 再合并，**禁止整体覆盖**。
+
+> 分类判据与完整名册见 [`../skills/README.md`](../skills/README.md)。
 
 ## Web 搜索配置
 

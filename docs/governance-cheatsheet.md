@@ -6,6 +6,8 @@
 > 版本：v1.0（2026-08-08）
 > 维护原则：本手册是**检索入口**而非规则本体；所有条目最终以 `~/.openclaw/company-info/company-hard-rules.md` + `docs/governance.md` + 公告板为权威源，手册条目变更需引用源头 commit/PR
 
+> **⚠ 版本状态（2026-09-19）**：本手册为 **v1.0（2026-08-08，软件版）**，早于公司硬规则 **v2.0（数学研究版，2026-09-17 生效）**。下方 **一、任务管理 / 二、代码工程 / 四、文档规则** 三板块中与 v2.0 冲突的条目已就地标 `[DEPRECATED]`；**全篇 v2.0 重写列入批 B**（架构师签）。检索时以 `company-hard-rules.md`（唯一硬规则源）为准。
+
 ---
 
 ## 0. 使用方法（结论先行）
@@ -21,16 +23,17 @@
 
 ## 一、任务管理板块（5 条）
 
-### T1. Valid Proof 三要素
+### T1. Valid Proof 三要素（数学版）
 
-- **结论**：提交任务必须同时附三项证据——代码在 main/指定分支 commit hash 可查、`root pnpm test` 退出码 0、功能真实可用（不是 mock / 不是 dummy key）。
-- **出处**：`company-hard-rules.md § 一·3`（一.任务管理规则·3.验收标准）
+- **结论**：提交任务必须同时附三项证据——**出处可查**（远端仓 + 分支 + commit hash）、**文档可编译**（`latexmk -pdf` 退出码 0）、**结论已独立复核**（不得自验，须第二名推导员重推或数值点验吻合，复核记录随任务提交）。
+- **出处**：`company-hard-rules.md § 一·3`（数学研究版 v2.0，2026-09-17 生效）
 - **动作**：提交前自测 3 项，缺一项不提交。
+- **[DEPRECATED]**：旧表述「`root pnpm test` 退出码 0 / 不是 mock / 不是 dummy key」已随 v2.0 作废（见 C3）。
 
 ### T2. 阻塞处理
 
 - **结论**：发现阻塞**立即**调 `company_task_block`，不等下次 progress；解除用 `company_task_unblock`。
-- **出处**：`company-hard-rules.md § 一·2` + `skills/company-task-execution/SKILL.md` § 6
+- **出处**：`company-hard-rules.md § 一·2` + Company OS 工具 `company_task_block` / `company_task_unblock`
 - **动作**：block 时填真实原因，不写"等验收"占位。
 
 ### T3. 子任务拆分标准
@@ -64,14 +67,16 @@
 ### C2. Conventional Commits
 
 - **结论**：提交信息用 `type(scope): subject`，type ∈ {feat / fix / docs / refactor / test / chore}。
-- **出处**：`company-hard-rules.md § 二·2` + `skills/company-code/SKILL.md` § 开工前检查
+- **出处**：`company-hard-rules.md § 二·2`
 - **动作**：subject 中文 ≤30 字；正文写 why/what/影响范围；关联任务时引用 taskId。
+- **注**：v2.0 § 二·2 已改用 `deriv: / proof: / lit: / num:` 提交前缀（替代 Conventional Commits），全篇口径待批 B 重写。
 
-### C3. 验收硬线：root pnpm test 全绿
+### C3. [DEPRECATED] 验收硬线：root pnpm test 全绿
 
-- **结论**：所有变更必须通过 `root pnpm test`，**退出码 0** 是硬性验收线。
-- **出处**：`company-hard-rules.md § 二·3`
-- **动作**：提交前本地跑一次，截图日志或附 commit 日志。
+- **[DEPRECATED]**：`pnpm test` 全绿**不再是验收线**（公司硬规则 v2.0 § 二·3 明文作废）。
+- **现行验收线**：见 **T1**（数学版 Valid Proof 三要素：出处可查 / `latexmk -pdf` 退出码 0 / 独立复核）。
+- **出处**：`company-hard-rules.md § 二·3`（v2.0：`pnpm test` 不再是验收线）
+- **动作**：不要再以 pnpm test 作为验收依据。
 
 ### C4. L2→L1 Review 流程
 
@@ -79,11 +84,12 @@
 - **出处**：`company-hard-rules.md § 二·4`
 - **动作**：跨板块 review 触发条件 = 接口（DTO / API / schema）变更；纯内部实现不需要对方 review。
 
-### C5. Coding Agent 强制使用
+### C5. [DEPRECATED] Coding Agent 强制使用
 
-- **结论**：多文件实现 / 预估 >30min / Issue-to-PR / 跨模块重构 → **必须**委派 Claude Code，不得手动逐行编码。
-- **出处**：`company-hard-rules.md § 七·1` + 公告 `123f6b67-55d3-4576-a347-f8c092033edd`（公司硬规则第七节·Coding Agent 强制使用规则）
-- **动作**：单文件简单编辑 / 只读调查 / 配置修改 / 文档编写 → 可手动；其他一律 coding-agent。
+- **[DEPRECATED]**：「强制委派」条款已**作废**（公司硬规则 v2.0 § 七·1 明文作废，数学解析推导不适用）。
+- **现行口径**：**自愿使用**——脚本 / 绘图 / 数据处理 / 工具代码类任务可自愿使用 coding-agent 技能（启动前读 `coding-agent/SKILL.md`，`background:true`，prompt 写临时文件，带 notification route，用 `process` 监控，不盲目 kill）；禁止 worker 失败/卡住时静默改为手写而不上报。
+- **出处**：`company-hard-rules.md § 七`（v2.0）
+- **动作**：不再以本条目要求逐行编码或 PR 流程。
 
 ---
 
@@ -110,7 +116,7 @@
 ### M4. 单世界线沟通
 
 - **结论**：跨 agent 通信一律走目标 agent 的 **main session**（`agent:<id>:main`），不做 peer session 隔离。
-- **出处**：`docs/architecture.md § 单世界线` + `skills/company-dialogue/SKILL.md`
+- **出处**：`docs/architecture.md § 单世界线`
 - **动作**：收到消息原路回复（`sourceSession` 元数据）；不拼新 key，不反拼。
 
 ---
@@ -183,15 +189,15 @@
 
 | 文件 / 公告 | 路径 / ID | 引用条目 |
 |------------|----------|---------|
-| 公司硬规则 v1.1 | `~/.openclaw/company-info/company-hard-rules.md` | T1-T5, C1-C4, M1-M3, D1-D3, S2-S3 |
+| 公司硬规则 v2.0（唯一硬规则源） | `~/.openclaw/company-info/company-hard-rules.md` | T1-T5, C1-C5, M1-M4, D1-D3, S1-S3 |
 | 公司规则 v1.0 公告 | `3a3843af-a051-4485-8d29-99b69afe6bc7` | S1 |
-| Coding Agent 强制规则公告 | `123f6b67-55d3-4576-a347-f8c092033edd` | C5 |
 | 治理铁律 12 条 | `docs/governance.md` | T5 |
 | 架构设计（单世界线） | `docs/architecture.md` | M4 |
 | 维护协作约定 | `docs/maintenance.md` | D3, S3 |
-| 任务执行规则技能 | `skills/company-task-execution/SKILL.md` | T2 |
-| Coding 规则技能 | `skills/company-code/SKILL.md` | C2 |
-| 跨 agent 对话技能 | `skills/company-dialogue/SKILL.md` | M4 |
+| Company OS 工具（操作权威源） | `company_task_*` / `company_org_*` / `company_meeting_*` / `company_notice_*` / `company_inbox` | T2, M1-M4 |
+| 岗位定义 | `~/.openclaw/company-info/role-requirements/*.md` | 组织/岗位相关条目 |
+| 人设审查技能（自研 owned） | `skills/persona-audit/` | 人设相关 |
+| 学习闭环技能（上游安装 upstream） | `self-improving-agent`（ClawHub pskoett v4.0.1） | 学习/教训相关 |
 | Hook：公司规则注入 | `hooks/company-guidelines/HOOK.md` | S3 |
 
 ---

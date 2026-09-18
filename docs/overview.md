@@ -14,11 +14,11 @@
 ├───────────────┼─────────────────────────────────────┤
 │  规则注入层    │ Hook: company-guidelines + self-improvement │
 ├───────────────┼─────────────────────────────────────┤
-│  技能体系层    │ 8 个 Skills: 协作 / 任务 / 工程 / 治理  │
+│  技能体系层    │ Skills: 自研 / 上游安装 / 仓内未部署   │
 ├───────────────┼─────────────────────────────────────┤
 │  Company OS   │ 任务流 + 会议编排 + 告示板 + 组织管理   │
 ├───────────────┼─────────────────────────────────────┤
-│  人设治理层    │ 6+2 文件结构 / persona-audit / memory   │
+│  人设治理层    │ 5 文件结构 / persona-audit / memory   │
 ├───────────────┼─────────────────────────────────────┤
 │  基础平台层    │ OpenClaw: workspace / sessions / cron   │
 └───────────────┴─────────────────────────────────────┘
@@ -32,8 +32,8 @@
 
 - **等级体系**：0 级（Boss/人类）-> 1 级（管理者）-> 2 级（执行者）
 - **权限分配**：1 级可派发任务，2 级执行任务
-- **技能分配**：按等级和职位分配可用技能
-- **权威源**：`company-org-chart` 技能为单一权威基准
+- **技能分配**：按等级和职位分配可用技能（见 `skills/README.md`）
+- **权威源**：`~/.openclaw/company-info/role-requirements/*.md`（岗位定义）+ 公告板；操作走 Company OS `company_org_*`
 
 ### 2. 规则注入层
 
@@ -45,18 +45,15 @@
 
 ### 3. 技能体系层
 
-8 个自建技能，分为四类：
+公司技能按**来源**三分：**自研（owned）** / **上游安装（upstream）** / **仓内未部署（repo-only）**。分类判据、名册与部署方式见 [`../skills/README.md`](../skills/README.md)。
 
-| 类别 | 技能 | 作用 |
+| 类别 | 技能 | 说明 |
 |------|------|------|
-| 协作 | company-dialogue | 跨 Agent 对话规则（单世界线） |
-| 协作 | company-org-chart | 组织架构权威源 |
-| 任务 | company-task-dispatch | 任务派发流程 |
-| 任务 | company-task-execution | 任务执行流程 |
-| 工程 | company-code | 代码工程规则 |
-| 工程 | company-reporting | 工作总结与对外汇报 |
-| 治理 | persona-audit | 人设文件审查 |
-| 治理 | self-improvement | 经验教训记录与提升 |
+| 自研 | `persona-audit` | 人设文件审查（仓内 canonical，部署 repo→live） |
+| 上游安装 | `self-improving-agent` | ClawHub 安装（pskoett v4.0.1），不在本仓管理 |
+| 上游安装 | `imap-smtp-email` | ClawHub 安装（gzlicanyi v0.0.19），live-only |
+| 仓内未部署 | `self-improvement` | 上游 v4.0.0 改名 fork，冻结，仅存档 |
+| 仓内未部署 | 6 个 `company-*` | legacy，仅存档（组织/任务/对话规则已由 Company OS 工具与硬规则承载） |
 
 ### 4. Company OS
 

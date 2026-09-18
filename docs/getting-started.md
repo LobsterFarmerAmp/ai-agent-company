@@ -10,18 +10,16 @@
 
 ## 步骤一：设置组织架构
 
-1. 复制 `skills/company-org-chart/SKILL.md` 到你的 OpenClaw skills 目录
-2. 按你的团队修改等级、成员、汇报关系
-3. 确定每个职位的技能分配
+组织架构**不由技能承载**，权威源 = `~/.openclaw/company-info/role-requirements/*.md`（岗位定义）+ 公告板。启用 Company OS 后（见步骤五），用 `company_org_*` 工具维护成员、职位、层级、汇报关系。
 
-```bash
-cp -r skills/company-org-chart ~/.openclaw/skills/
-# 编辑 SKILL.md，替换为你的团队成员
+```text
+# 不要用 cp -r 部署 company-org-chart（该技能为 legacy / repo-only，不部署）
+# 组织架构走：company_org_add / company_org_update / company_org_list
 ```
 
 ## 步骤二：安装公司规则 Hook
 
-1. 创建 `~/.openclaw/company-info/company-hard-rules.md`（参考下方模板）
+1. 在 `~/.openclaw/company-info/company-hard-rules.md` 建立硬规则文件（唯一源，见文末指针）
 2. 安装 company-guidelines hook
 
 ```bash
@@ -37,12 +35,17 @@ cp -r hooks/self-improvement ~/.openclaw/hooks/
 
 ## 步骤三：安装技能
 
-```bash
-# 复制所有技能
-cp -r skills/* ~/.openclaw/skills/
-```
+**不存在通配符批量安装。** 按技能来源分三类，逐技能、显式、可核验地部署（分类判据与名册见 [`../skills/README.md`](../skills/README.md)）：
 
-根据你的组织架构，编辑 `company-org-chart/SKILL.md` 中的技能分配表。
+- **自研（owned）**：先 `diff -r` 比对仓内与 live，确认差异为口径类后**合并**，**禁止整体覆盖**。
+  ```bash
+  diff -r skills/persona-audit ~/.openclaw/skills/persona-audit
+  ```
+- **上游安装（upstream）**：**不部署**仓内副本；需要时走 ClawHub 安装。
+  ```bash
+  openclaw skills install @pskoett/self-improving-agent
+  ```
+- **仓内未部署（repo-only）**：**不部署**，仅存档（含全部 legacy `company-*` 技能）。
 
 本次部署约定 `jia-goushi` Agent 担任首席架构师。不要在 Hook 或技能路由中排除 `jia-goushi`；它与其他 Agent 一样接收公司规则。
 
@@ -108,40 +111,11 @@ cp templates/HEARTBEAT.md ~/.openclaw/workspace-<agent-id>/
 4. 测试公告：管理者 company_notice_publish -> 确认所有 Agent 可通过 company_notice_list 看到
 5. 测试会议：管理者 company_meeting_request -> delegate 授权发言 -> 参会者 speak -> end 总结
 
-## company-hard-rules.md 模板
+## 公司硬规则：唯一源
 
-```markdown
-## 0. 技能读取原则
+公司硬规则**只存在于** `~/.openclaw/company-info/company-hard-rules.md`（由 hook 注入各 agent 的 `AGENTS.md`）。
 
-- 本文件是强制规则路由器，不是建议。
-- 触发下列任一任务类型时，必须在执行前读取对应技能。
-
-## 1. 通用安全红线
-
-- 绝不写入明文密钥、cookie、token、授权码；统一使用环境变量。
-- 破坏性操作、外部发布、账号风险操作必须先获得明确授权。
-- 修改任何配置、代码或文件前先读现状；变更后做最小可行验证。
-
-## 2. 技能目录
-
-| 触发条件 | 读取技能 |
-|----------|----------|
-| 跨 agent 对话、发消息、回复 | company-dialogue |
-| 创建任务、正式派活 | company-task-dispatch |
-| 执行任务、提交交付物 | company-task-execution |
-| 写代码、改代码 | company-code |
-| 工作总结、对外汇报 | company-reporting |
-| 查询组织架构 | company-org-chart |
-
-## 会议基本规则
-
-- 收到以 `【Company OS 公司会议】` 开头的上下文时，视为已进入公司会议；严格按消息号和轮次阅读会议记录，并执行其中的“当前要求”。
-- 会议期间可以正常使用读取、搜索、浏览器和命令工具。当前要求涉及源码、文件、日志、配置、运行状态或外部事实时，必须先实际核验；无法核验时须在发言中如实说明。
-- 普通参会者只有取得发言权后才能发言；完成思考和必要核验后，调用 `company_meeting_speak`，只提交完整正文，不要用普通回复代替会议发言。
-- 主持人负责控制会议节奏：用 `company_meeting_speak` 提交自己的发言，用 `company_meeting_delegate` 点名下一位发言者；任务会议还须维护任务草案，并通过 `company_meeting_end` 申请结束。
-- 会议工具会自动识别当前唯一活动会议和发言轮次；不要自行填写或猜测 `meetingId`、`turnId`。
-- 会议讨论默认只授权读取和诊断；写入文件、修改配置或产生外部副作用，必须有当前会议要求或既有任务的明确授权。
-```
+**本仓不存内嵌副本**——避免出现与源文件漂移的第二份规则文本。查看现行规则请直接读源文件；规则变更走「改源文件 → 发公司公告 → 回写引用它的文档」。
 
 ## 下一步
 
