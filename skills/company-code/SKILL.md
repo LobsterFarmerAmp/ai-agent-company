@@ -3,6 +3,8 @@ name: "company-code"
 description: "公司代码规则：uv优先、coding-agent派发、Codex review优先、最小变更、凭据保护、验证要求、git流程、<project-name> 仓库治理"
 ---
 
+> ⚠ 归档（repo-only）：本技能已废止，由 Company OS 工具与 `company-hard-rules.md` v2.0 承载；**不部署**，仅供历史参考。
+
 # 公司代码规则
 
 触发条件：写代码、改代码、运行测试、安装依赖、提交/推送代码、派发 coding-agent/Codex 工程任务；进入或操作 <project-name> 项目。

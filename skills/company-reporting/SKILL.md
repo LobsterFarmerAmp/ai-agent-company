@@ -3,6 +3,8 @@ name: "company-reporting"
 description: "工作总结与对外汇报规则：结构、受众、外部发送授权、敏感信息检查"
 ---
 
+> ⚠ 归档（repo-only）：本技能已废止，由 Company OS 工具与 `company-hard-rules.md` v2.0 承载；**不部署**，仅供历史参考。
+
 # 工作总结与对外汇报规则
 
 触发条件：正式工作总结、日报、周报、复盘、对外邮件、外部同步内容。

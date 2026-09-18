@@ -9,6 +9,8 @@ metadata:
   author: "OpenAI adaptation from user-provided skill"
 ---
 
+> ⚠ 冻结（repo-only）：上游 v4.0.0 改名 fork，**不得覆盖 live 上游 `self-improving-agent`**；仅存档。
+
 # Self-Improvement
 
 Capture, review, promote, and extract durable lessons so future sessions avoid repeating the same mistakes.

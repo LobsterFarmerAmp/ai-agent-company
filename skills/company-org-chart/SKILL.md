@@ -3,6 +3,8 @@ name: "company-org-chart"
 description: "公司组织架构：Boss、架构师、CTO、数据工程师、后端工程师、文案策划的汇报关系、等级与权限"
 ---
 
+> ⚠ 归档（repo-only）：本技能已废止，由 Company OS 工具与 `company-hard-rules.md` v2.0 承载；**不部署**，仅供历史参考。
+
 # 公司组织架构
 
 > 权威基准，由架构师维护。

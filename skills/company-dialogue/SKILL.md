@@ -3,6 +3,8 @@ name: "company-dialogue"
 description: "跨agent对话与沟通规则：主动发送走 main session、收到消息原路回复、单世界线原则"
 ---
 
+> ⚠ 归档（repo-only）：本技能已废止，由 Company OS 工具与 `company-hard-rules.md` v2.0 承载；**不部署**，仅供历史参考。
+
 # 跨 Agent 对话与沟通规则
 
 触发条件：给其他 agent 发消息、回复消息、通知、同步规则或状态、任何跨 agent 沟通。

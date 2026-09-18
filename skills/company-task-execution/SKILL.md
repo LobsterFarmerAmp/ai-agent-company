@@ -3,6 +3,8 @@ name: "company-task-execution"
 description: "任务执行规则：company_task_start启动、company_task_progress保活、company_task_submit提交"
 ---
 
+> ⚠ 归档（repo-only）：本技能已废止，由 Company OS 工具与 `company-hard-rules.md` v2.0 承载；**不部署**，仅供历史参考。
+
 # 任务执行规则
 
 触发条件：收到任务、需要执行正式任务、提交交付物。

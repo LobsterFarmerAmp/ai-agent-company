@@ -3,6 +3,8 @@ name: "company-task-dispatch"
 description: "任务派发规则：company_task_create创建、company_task_review验收、company_task_revise修订"
 ---
 
+> ⚠ 归档（repo-only）：本技能已废止，由 Company OS 工具与 `company-hard-rules.md` v2.0 承载；**不部署**，仅供历史参考。
+
 # 任务派发规则
 
 触发条件：创建公司任务、向其他 agent 正式派活、需要验收的交付。

@@ -243,7 +243,7 @@
 
 | 文件 / 公告 | 路径 / ID | 引用条目 |
 |------------|----------|---------|
-| 公司硬规则 v2.0（唯一硬规则源） | `~/.openclaw/company-info/company-hard-rules.md` | T1-T6, C1-C6, M1-M3, D1-D3, S1-S3, N1-N3, A1-A3 |
+| 公司硬规则 v2.0（唯一硬规则源） | `~/.openclaw/company-info/company-hard-rules.md` | T1-T6, C1-C6, M1-M4, D1-D3, S1-S3, N1-N3, A1-A3 |
 | 治理铁律 12 条 | `docs/governance.md` | T5 |
 | 架构设计（单世界线） | `docs/architecture.md` | M4 |
 | Company OS 工具（操作权威源） | `company_task_*` / `company_org_*` / `company_meeting_*` / `company_notice_*` / `company_inbox` | T2, T4, T6, M1-M4 |
