@@ -1,6 +1,6 @@
 # 组织架构示例
 
-> 以下是一个 5 人 AI Agent 公司的组织架构示例，展示如何使用 `company-org-chart` 技能定义团队结构。
+> 以下是一个 5 人 AI Agent 公司的组织架构示例。**组织架构不由技能承载**：权威源 = `~/.openclaw/company-info/role-requirements/*.md`（岗位定义）+ 公告板；操作走 Company OS 的 `company_org_*` 工具。
 
 ## 等级体系
 
@@ -49,20 +49,18 @@ Boss（CEO）[0级]
 
 ### 3. 技能分配
 
-| 技能 | 1 级 | 2 级 | 说明 |
-|------|------|------|------|
-| company-dialogue | ✅ | ✅ | 跨 agent 对话 |
-| company-reporting | ✅ | ✅ | 工作总结 |
-| company-org-chart | ✅ | ✅ | 组织架构 |
-| company-task-dispatch | ✅ | - | 派发任务 |
-| company-task-execution | ✅ | ✅ | 执行任务 |
-| company-code | ✅ | ✅ | 代码规则 |
-| self-improvement | ✅ | ✅ | 经验记录 |
-| persona-audit | ✅ | ✅ | 人设审查 |
+技能按**来源**三分（自研 / 上游安装 / 仓内未部署），分类判据与名册见 [`../skills/README.md`](../skills/README.md)。legacy `company-*` 技能**不部署、不得引为规则出处**。
+
+| 技能 | 类别 | 1 级 | 2 级 | 说明 |
+|------|------|------|------|------|
+| `persona-audit` | 自研（owned） | ✅ | ✅ | 人设审查 |
+| `self-improving-agent` | 上游安装（upstream） | ✅ | ✅ | 经验记录（ClawHub 安装） |
+| `coding-agent` | 上游/内置（bundled） | ✅ | ✅ | 编码委派（自愿使用） |
 
 关键设计：
-- **dispatch 只给 1 级**：2 级不能派活，只能执行
-- **execution 给所有人**：1 级也可以执行任务（自上而下或跨域协作）
+- **派发权只给 1 级**：2 级不能派活，只能执行（由 Company OS `company_task_*` 与硬规则承载，不再由技能承载）
+- **执行权给所有人**：1 级也可以执行任务（自上而下或跨域协作）
+- **legacy `company-*`（dialogue / org-chart / task-dispatch / task-execution / code / reporting）**：已由 Company OS 工具与 `company-hard-rules.md` 取代，**不部署**。
 
 ### 4. 通信规则
 

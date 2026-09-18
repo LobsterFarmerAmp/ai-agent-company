@@ -39,7 +39,7 @@
 
 通过 Hook 机制实现"改一处，全公司生效"。
 
-- **company-guidelines hook**：在 Agent bootstrap 时自动注入安全红线 + 技能路由表
+- **company-guidelines hook**：在 Agent bootstrap 时自动注入安全红线 + 技能读取原则
 - **self-improvement hook**：注入经验教训记录提醒
 - **优势**：不需要在每个 Agent 里手动维护规则副本
 
