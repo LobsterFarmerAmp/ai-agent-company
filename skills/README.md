@@ -21,6 +21,7 @@
 | 技能 | 触发条件 | 作用 | 出处 |
 |------|---------|------|------|
 | `persona-audit` | 审查人设文件 | 5 文件审计 + 精简方案 | 本仓 canonical |
+| `interrupted-task-resume` | 任务被重复派发 / turn 中途 abort | 先找已落盘进度再续跑；先写后验 | 本仓 canonical |
 
 ### 上游安装（upstream，不在本仓管理）
 
