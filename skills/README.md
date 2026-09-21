@@ -44,7 +44,7 @@
 | `company-task-execution` | 收到任务、提交交付 | start → progress → submit | legacy（同上） |
 | `company-code` | 写代码、改代码 | 工程规范、git 流程 | legacy（同上） |
 | `company-reporting` | 工作总结、对外汇报 | 总结结构、授权规则 | legacy（同上） |
-| `self-improvement` | 犯错、纠正、发现 | capture → promote → extract 闭环 | **冻结**：上游 v4.0.0 的改名 fork，不得覆盖 live；如需推进 python 移植须**换名另行立项** |
+| `self-improvement` | 犯错、纠正、发现 | capture → promote → extract 闭环 | **冻结**：上游 v4.0.0 的改名 fork，不得覆盖 live；如需推进去重整合须**换名另行立项** |
 
 ## 部署
 
