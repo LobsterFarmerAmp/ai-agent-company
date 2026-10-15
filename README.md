@@ -54,8 +54,8 @@
 
 ## 本次部署约定
 
-- `jia-goushi` 担任 OpenClaw 首席架构师，接收全部公司规则 Hook。
-- 架构师与 Codex 共同维护龙虾池与本仓库 `codex/main-agent-architect` 分支；职责见 [`docs/maintenance.md`](docs/maintenance.md)。
+- `architect` 担任 OpenClaw 首席架构师，接收全部公司规则 Hook。
+- 架构师与 Codex 共同维护龙虾池与本仓库 `main` 分支；职责见 [`docs/maintenance.md`](docs/maintenance.md)。
 
 ## 运行环境
 

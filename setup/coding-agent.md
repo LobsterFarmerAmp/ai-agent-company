@@ -1,7 +1,7 @@
 # Coding Agent 配置（Claude Code + DeepSeek V4 Flash）
 
 > 配置日期：2026-08-05  
-> 执行者：CTO 林知衡  
+> 执行者：CTO  
 > 记录者：架构师  
 > 前置条件：bootstrap 完成，Gateway 本机运行，macOS Keychain 可用
 

@@ -2,7 +2,7 @@
 
 - **事件 ID**: ERR-20260808-001（沿用）/ INC-2026-08-09-memory-search
 - **核验任务**: 7e4d2ac7-aa46-499a-9912-1113c18adc25（阶段1）
-- **核验人**: 宪章（xian-zhang）
+- **核验人**: 治理专员（governance）
 - **核验时间**: 2026-08-09 02:34 GMT+8
 - **关联公告**: 8c8613cb（嵌入 provider 配额耗尽 + 8/10 00:00 CST 解封）
 
@@ -17,21 +17,21 @@
 - **新发现（阶段1 风险）**：`openclaw memory status --index` 会触发跨 agent reindex 动作，
   多个 agent 抢同一把 `openclaw-agent.sqlite.reindex-lock.sqlite`，出现 **reindex lock 冲突**。
   阶段2 重建必须按 agent 串行，禁止并行。
-- **解封时间**：2026-08-10 00:00 CST。解封后由治理岗（xian-zhang）统一执行
+- **解封时间**：2026-08-10 00:00 CST。解封后由治理岗（governance）统一执行
   `openclaw memory index --force`，禁止各 agent 自行重建（公告 8c8613cb 纪律）。
 
 ## 可用性清单（8/8 实测）
 
 | Agent | memory_search | disabled | error | 取证方式 |
 |---|---|---|---|---|
-| jia-goushi | 不可用 | true | index provider settings changed | 本会话 + status --index |
-| lin-zhiheng | 不可用 | true | index provider settings changed | 本会话 + status --index |
-| shen-gu | 不可用 | true | index provider settings changed | sessions_send 回执 |
-| lu-jian | 不可用 | true | index provider settings changed | sessions_send 回执 |
-| wei-shu | 不可用 | true | index provider settings changed | sessions_send 回执 |
-| tan-wei | 不可用 | true | index provider settings changed | sessions_send 回执 |
-| gu-quan | 不可用 | true | index provider settings changed | sessions_send 回执 |
-| xian-zhang | 不可用 | true | index provider settings changed | 本会话 |
+| architect | 不可用 | true | index provider settings changed | 本会话 + status --index |
+| cto | 不可用 | true | index provider settings changed | 本会话 + status --index |
+| analyst | 不可用 | true | index provider settings changed | sessions_send 回执 |
+| researcher-a | 不可用 | true | index provider settings changed | sessions_send 回执 |
+| researcher-b | 不可用 | true | index provider settings changed | sessions_send 回执 |
+| researcher-c | 不可用 | true | index provider settings changed | sessions_send 回执 |
+| researcher-d | 不可用 | true | index provider settings changed | sessions_send 回执 |
+| governance | 不可用 | true | index provider settings changed | 本会话 |
 
 **100% 全员命中**，无一例外，无 agent 单独异常。
 
@@ -63,7 +63,7 @@ Vector dims: 2048
 - 实际 `Provider: openai-compatible` = fallback 兜底生效
 - 8/8 agent 字段完全一致 → 全员共享同一份 OpenClaw 配置，被同一份配额卡住
 
-### C. 嵌入调用实时日志（来自 shen-gu status 输出）
+### C. 嵌入调用实时日志（来自 analyst status 输出）
 
 ```
 openai-compatible embeddings failed: HTTP 429: AccountQuotaExceeded

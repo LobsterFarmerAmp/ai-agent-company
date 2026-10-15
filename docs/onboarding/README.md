@@ -6,13 +6,13 @@
 
 | 文件 | 命名 | 作者 |
 |------|------|------|
-| 治理-入职熟悉笔记-宪章.md | 治理规范专员视角 | xian-zhang |
+| 治理-入职熟悉笔记.md | 治理规范专员视角 | governance |
 
 ## 用途
 
 - 沉淀新人对公司硬规则、治理仓库结构、Company OS 工具族的实际理解；
 - 把实战中发现的疑问点和建设性优化建议沉淀为可治理的输入；
-- 治理岗（xian-zhang）定期把高优建议提报 PR 到 `codex/main-agent-architect`，由架构师 review。
+- 治理岗（governance）定期把高优建议提报 PR 到 `main`，由架构师 review。
 
 ## 阅读顺序
 

@@ -181,7 +181,7 @@ curl -sS -X POST http://127.0.0.1:8791/v1/embeddings \
 openclaw gateway restart
 
 # 5.2 串行重建所有 agent 索引（参见阶段2 重建报告 §"执行流水"）
-for ag in jia-goushi lin-zhiheng shen-gu lu-jian wei-shu tan-wei gu-quan xian-zhang; do
+for ag in architect cto analyst researcher-a researcher-b researcher-c researcher-d governance; do
   openclaw memory index --force --agent ${ag}
 done
 ```
@@ -275,11 +275,11 @@ openclaw memory search --query "memory_search 回归验收" --agent <id> --max-r
   - `docs/ops/memory-search-reindex-2026-08-09.md`（阶段2 重建 + 新增整改项）
   - `docs/ops/memory-search-regression-acceptance-2026-08-09.md`（阶段2 回归验收）
 - 个人学习记录：
-  - `~/.openclaw/workspace-xian-zhang/.learnings/ERRORS.md` → ERR-20260809-001（治理报告事实错误）
-  - `~/.openclaw/workspace-xian-zhang/.learnings/LEARNINGS.md` → LRN-20260809-002（治理报告进程归属双信号验证）
+  - `~/.openclaw/workspace-governance/.learnings/ERRORS.md` → ERR-20260809-001（治理报告事实错误）
+  - `~/.openclaw/workspace-governance/.learnings/LEARNINGS.md` → LRN-20260809-002（治理报告进程归属双信号验证）
 - 相关 agent：
-  - 架构师 jia-goushi（plist / wrapper / Keychain key 维护）
-  - 治理岗 xian-zhang（本机文档同步 + setup/ 双线维护）
+  - 架构师 architect（plist / wrapper / Keychain key 维护）
+  - 治理岗 governance（本机文档同步 + setup/ 双线维护）
 
 ## 配置参考
 

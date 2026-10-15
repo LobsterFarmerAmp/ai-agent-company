@@ -1,7 +1,7 @@
 # memory_search 索引重建执行记录（阶段2）
 
 - **任务**: 28b96af4-d2d9-41e1-8679-250f8a39d12f（阶段2·重建索引）
-- **执行人**: 宪章（xian-zhang）
+- **执行人**: 治理专员（governance）
 - **执行时间**: 2026-08-09 11:35-11:36 CST
 - **关联**:
   - 阶段1 报告 `docs/ops/memory-search-incident-2026-08-09.md`（§D reindex lock 冲突）
@@ -23,20 +23,20 @@
 - 代理路径：`~/.openclaw/bin/doubao-embedding-proxy.js`（PID 11388，launchd 守护，端口 8791）
 - 代理环境：`ARK_EMBEDDING_KEY` 从 Keychain service `volcengine_token` 读取
 - OpenClaw `memorySearch.remote.baseUrl` → `http://127.0.0.1:8791`
-- 架构师本人（jia-goushi）已实测 `memory index --force` 成功 + memory_search 正常返回
+- 架构师本人（architect）已实测 `memory index --force` 成功 + memory_search 正常返回
 
 ## 执行流水
 
 | 时间 | Agent | 操作 | 结果 | memory_search 验证 |
 |---|---|---|---|---|
-| 11:29 | jia-goushi | `--force --agent jia-goushi`（架构师本人执行） | ✅ 索引已重建 | — |
-| 11:35:34 | xian-zhang | `--force --agent xian-zhang`（治理岗验证） | ✅ Memory index updated | ✅ 命中 `memory/2026-08-09-meeting-memory-search.md` |
-| 11:35:45 | lin-zhiheng | `--force --agent lin-zhiheng` | ✅ Memory index updated | ✅ 命中 `memory/2026-08-09.md` |
-| 11:35:54 | shen-gu | `--force --agent shen-gu` | ✅ Memory index updated | ✅ 命中 `memory/2026-08-09.md` |
-| 11:36:01 | lu-jian | `--force --agent lu-jian` | ✅ Memory index updated | ✅ 命中 `memory/dreaming/light/2026-08-09.md` |
-| 11:36:06 | wei-shu | `--force --agent wei-shu` | ✅ Memory index updated | ✅ 命中 `memory/2026-08-09.md` |
-| 11:36:13 | tan-wei | `--force --agent tan-wei` | ✅ Memory index updated | ✅ 命中 `memory/dreaming/rem/2026-08-09.md` |
-| 11:36:20 | gu-quan | `--force --agent gu-quan` | ✅ Memory index updated | ✅ 命中 `memory/2026-08-09.md` |
+| 11:29 | architect | `--force --agent architect`（架构师本人执行） | ✅ 索引已重建 | — |
+| 11:35:34 | governance | `--force --agent governance`（治理岗验证） | ✅ Memory index updated | ✅ 命中 `memory/2026-08-09-meeting-memory-search.md` |
+| 11:35:45 | cto | `--force --agent cto` | ✅ Memory index updated | ✅ 命中 `memory/2026-08-09.md` |
+| 11:35:54 | analyst | `--force --agent analyst` | ✅ Memory index updated | ✅ 命中 `memory/2026-08-09.md` |
+| 11:36:01 | researcher-a | `--force --agent researcher-a` | ✅ Memory index updated | ✅ 命中 `memory/dreaming/light/2026-08-09.md` |
+| 11:36:06 | researcher-b | `--force --agent researcher-b` | ✅ Memory index updated | ✅ 命中 `memory/2026-08-09.md` |
+| 11:36:13 | researcher-c | `--force --agent researcher-c` | ✅ Memory index updated | ✅ 命中 `memory/dreaming/rem/2026-08-09.md` |
+| 11:36:20 | researcher-d | `--force --agent researcher-d` | ✅ Memory index updated | ✅ 命中 `memory/2026-08-09.md` |
 
 - **总耗时**: ~50s（11:35:34 → 11:36:24）
 - **平均每个 agent**: ~7s（含索引重建 + 立即探针验证）

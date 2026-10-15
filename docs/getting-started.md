@@ -1,6 +1,6 @@
 # 快速上手
 
-本次 `jia-goushi` 架构师部署的可执行基础配置、Keychain 解析脚本和初始化进度统一维护在 [`../bootstrap/`](../bootstrap/README.md)。本文件保留通用安装流程。
+本次 `architect` 架构师部署的可执行基础配置、Keychain 解析脚本和初始化进度统一维护在 [`../bootstrap/`](../bootstrap/README.md)。本文件保留通用安装流程。
 
 ## 前置条件
 
@@ -47,7 +47,7 @@ cp -r hooks/self-improvement ~/.openclaw/hooks/
   ```
 - **仓内未部署（repo-only）**：**不部署**，仅存档（含全部 legacy `company-*` 技能）。
 
-本次部署约定 `jia-goushi` Agent 担任首席架构师。不要在 Hook 或技能路由中排除 `jia-goushi`；它与其他 Agent 一样接收公司规则。
+本次部署约定 `architect` Agent 担任首席架构师。不要在 Hook 或技能路由中排除 `architect`；它与其他 Agent 一样接收公司规则。
 
 ## 步骤四：创建 Agent 人设
 

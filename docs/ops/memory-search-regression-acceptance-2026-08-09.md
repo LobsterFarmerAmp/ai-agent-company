@@ -1,7 +1,7 @@
 # memory_search 全员回归验收报告（阶段2）
 
 - **任务**: 1570c23d-a670-4bb7-8170-5e9105c37848（阶段2·全员回归验收）
-- **验收人**: 宪章（xian-zhang）
+- **验收人**: 治理专员（governance）
 - **验收时间**: 2026-08-09 11:40 CST
 - **关联**:
   - 阶段1 报告 `docs/ops/memory-search-incident-2026-08-09.md`（核验可用性 + 异常清单）
@@ -27,14 +27,14 @@
 
 | Agent | 命中 | 摘要 |
 |---|---|---|
-| jia-goushi | `0.557 memory/dreaming/light/2026-08-09.md:1-22` | Light Sleep（REM 周期浅睡） |
-| lin-zhiheng | `0.589 memory/2026-08-09.md:1-16` | Memory · 2026-08-09 |
-| shen-gu | `0.284 memory/2026-08-09.md:18-39` | memory_search 不可用降级反思（已知 infra 故障文档化） |
-| lu-jian | `0.513 memory/dreaming/light/2026-08-09.md:28-47` | Promotion 候选评估 |
-| wei-shu | `0.525 memory/2026-08-09.md:1-25` | 2026-08-09 每日反思（韦枢） |
-| tan-wei | `0.000 memory/dreaming/rem/2026-08-09.md:1-15` | REM Sleep |
-| gu-quan | `0.484 memory/2026-08-09.md:25-46` | ERR-20260809-001（memory_search 不可用降级协议） |
-| xian-zhang | `0.279 memory/dreaming/light/2026-08-09.md:1-27` | Light Sleep（含本人候选 promote） |
+| architect | `0.557 memory/dreaming/light/2026-08-09.md:1-22` | Light Sleep（REM 周期浅睡） |
+| cto | `0.589 memory/2026-08-09.md:1-16` | Memory · 2026-08-09 |
+| analyst | `0.284 memory/2026-08-09.md:18-39` | memory_search 不可用降级反思（已知 infra 故障文档化） |
+| researcher-a | `0.513 memory/dreaming/light/2026-08-09.md:28-47` | Promotion 候选评估 |
+| researcher-b | `0.525 memory/2026-08-09.md:1-25` | 2026-08-09 每日反思（研究员 B） |
+| researcher-c | `0.000 memory/dreaming/rem/2026-08-09.md:1-15` | REM Sleep |
+| researcher-d | `0.484 memory/2026-08-09.md:25-46` | ERR-20260809-001（memory_search 不可用降级协议） |
+| governance | `0.279 memory/dreaming/light/2026-08-09.md:1-27` | Light Sleep（含本人候选 promote） |
 
 → 每个 agent 都返回了 score（0~1，越高越相关）、文件路径、内容摘要，**无 disabled/error/空响应**。
 
@@ -42,14 +42,14 @@
 
 | Agent | Provider (requested) | Embeddings | Indexed | Vector dims |
 |---|---|---|---|---|
-| jia-goushi | openai-compatible (volcengine-token) | ready | 32/32 · 108 chunks | 2048 |
-| lin-zhiheng | openai-compatible (volcengine-token) | ready | 22/22 · 90 chunks | 2048 |
-| shen-gu | openai-compatible (volcengine-token) | ready | 16/16 · 43 chunks | 2048 |
-| lu-jian | openai-compatible (volcengine-token) | ready | 15/15 · 26 chunks | 2048 |
-| wei-shu | openai-compatible (volcengine-token) | ready | 17/17 · 40 chunks | 2048 |
-| tan-wei | openai-compatible (volcengine-token) | ready | 9/9 · 24 chunks | 2048 |
-| gu-quan | openai-compatible (volcengine-token) | ready | 6/6 · 9 chunks | 2048 |
-| xian-zhang | openai-compatible (volcengine-token) | ready | 11/11 · 18 chunks | 2048 |
+| architect | openai-compatible (volcengine-token) | ready | 32/32 · 108 chunks | 2048 |
+| cto | openai-compatible (volcengine-token) | ready | 22/22 · 90 chunks | 2048 |
+| analyst | openai-compatible (volcengine-token) | ready | 16/16 · 43 chunks | 2048 |
+| researcher-a | openai-compatible (volcengine-token) | ready | 15/15 · 26 chunks | 2048 |
+| researcher-b | openai-compatible (volcengine-token) | ready | 17/17 · 40 chunks | 2048 |
+| researcher-c | openai-compatible (volcengine-token) | ready | 9/9 · 24 chunks | 2048 |
+| researcher-d | openai-compatible (volcengine-token) | ready | 6/6 · 9 chunks | 2048 |
+| governance | openai-compatible (volcengine-token) | ready | 11/11 · 18 chunks | 2048 |
 
 → 所有 agent 字段完全一致，配置统一切换到 token 计费。
 

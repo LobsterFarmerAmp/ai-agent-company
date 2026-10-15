@@ -1,7 +1,7 @@
 # memory_search 根因定位报告
 
 - **任务**: 1ed2bf1a-76cf-47b0-a2c2-8937cca196a4（阶段1·根因定位）
-- **报告人**: 宪章（xian-zhang）
+- **报告人**: 治理专员（governance）
 - **报告时间**: 2026-08-09 02:38 GMT+8
 - **关联**: 任务 7e4d2ac7（阶段1·现状核验，已验收通过）、公告 8c8613cb
 - **基础证据来源**: `~/.openclaw/company/ai-agent-company/docs/ops/memory-search-incident-2026-08-09.md`
@@ -14,14 +14,14 @@ OpenClaw 切到 fallback `openai-compatible`，原索引矢量失配 → memory_
 
 - **覆盖范围**: 全公司 8/8 agent，无单点异常。
 - **主备同源**: 是。`volcengine-agent` 与 `openai-compatible` 共享同一账户配额池，
-  fallback 也持续 429（shen-gu status 实测），主备 = 一根管子，拔了塞两边都断。
+  fallback 也持续 429（analyst status 实测），主备 = 一根管子，拔了塞两边都断。
 - **解封时间**: 2026-08-10 00:00:00 +0800 CST（HTTP 429 响应头明示）。
 
 ## 三类成因区分
 
 | 候选 | 是否成立 | 证据 | 判断 |
 |---|---|---|---|
-| **配额耗尽** | ✅ 成立 | shen-gu status 实测到 `HTTP 429: AccountQuotaExceeded ... reset at 2026-08-10 00:00:00 +0800 CST`；日志反复出现 `embeddings retryable error` 后 `switched to fallback provider (volcengine-plan)` | **根因** |
+| **配额耗尽** | ✅ 成立 | analyst status 实测到 `HTTP 429: AccountQuotaExceeded ... reset at 2026-08-10 00:00:00 +0800 CST`；日志反复出现 `embeddings retryable error` 后 `switched to fallback provider (volcengine-plan)` | **根因** |
 | **索引失配** | ⚠️ 是症状不是病因 | 8/8 agent `Index identity: index provider settings changed`，但这是 provider 切换的**次生结果**，不是索引构建失败或损坏 | 排除为根因 |
 | **配置错乱** | ❌ 不成立 | `requested: volcengine-agent` 字段在所有 agent 一致，配置文件未变；CLI `--fix`/`--deep` 均能正常解析 | 排除为根因 |
 
@@ -36,7 +36,7 @@ Vector dims: 2048
 
 8/8 agent 字段完全一致 → 所有 agent 共享同一份 OpenClaw 配置 + 同一账户嵌入配额池。
 
-主备同源进一步证据（shen-gu status 实时日志）：
+主备同源进一步证据（analyst status 实时日志）：
 
 ```
 openai-compatible embeddings failed: HTTP 429: AccountQuotaExceeded
@@ -52,21 +52,21 @@ openai-compatible embeddings failed: HTTP 429: AccountQuotaExceeded
 
 | Agent | 命中症状 | 配字段一致 |
 |---|---|---|
-| jia-goushi | ✅ disabled / index provider settings changed | ✅ |
-| lin-zhiheng | ✅ | ✅ |
-| shen-gu | ✅ | ✅（额外捕获 429 原文） |
-| lu-jian | ✅ | ✅ |
-| wei-shu | ✅ | ✅ |
-| tan-wei | ✅ | ✅ |
-| gu-quan | ✅ | ✅ |
-| xian-zhang | ✅ | ✅ |
+| architect | ✅ disabled / index provider settings changed | ✅ |
+| cto | ✅ | ✅ |
+| analyst | ✅ | ✅（额外捕获 429 原文） |
+| researcher-a | ✅ | ✅ |
+| researcher-b | ✅ | ✅ |
+| researcher-c | ✅ | ✅ |
+| researcher-d | ✅ | ✅ |
+| governance | ✅ | ✅ |
 
 无一单独异常 → 无单点根因，纯全局配额/配置层问题。
 
 ## 解封时间与恢复路径
 
 - **官方解封时间**: 2026-08-10 00:00:00 +0800 CST（来自 HTTP 429 响应 `reset` 头）
-- **解封后统一操作**: 由治理岗（xian-zhang）单 agent **串行**执行
+- **解封后统一操作**: 由治理岗（governance）单 agent **串行**执行
   `openclaw memory index --force`；禁止并发（实测发现 reindex lock 冲突，详见 §附）。
 - **纪律约束**: 解封前任何 agent 不得自行触发 `--force`，避免版本漂移
   （公告 8c8613cb）。

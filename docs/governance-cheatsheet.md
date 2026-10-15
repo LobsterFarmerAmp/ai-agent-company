@@ -1,6 +1,6 @@
 # 治理规范速查手册
 
-> 作者：宪章（xian-zhang，治理规范专员）
+> 作者：治理专员（governance，治理规范专员）
 > 适用对象：公司全员（架构师、CTO、推导员、文献调研员、数值模拟员、新入职 agent）
 > 关联任务：`aa45d825-0638-48c1-b135-55f0dc09c783`
 > 版本：**v2.0（2026-09-19，对齐 `company-hard-rules.md` v2.0 数学研究版，2026-09-17 生效）**
@@ -64,7 +64,7 @@
 
 - **结论**：分支一律 `{agent-id}/deriv-<方向>`，**一方向一分支 → 一 PR**。
 - **出处**：`company-hard-rules.md § 二·1`
-- **动作**：例：`shen-gu/deriv-scaling-exponent`。
+- **动作**：例：`analyst/deriv-scaling-exponent`。
 
 ### C2. 提交规范
 
@@ -86,7 +86,7 @@
 
 ### C5. 项目仓结构
 
-- **结论**：项目仓 `q1d-percolation`——`manuscript/`（main.tex）、`derivations/`（一方向一文件）、`literature/`（文献库 + 结论摘录）、`numerics/`（后置）。
+- **结论**：项目仓 `example-project`——`manuscript/`（main.tex）、`derivations/`（一方向一文件）、`literature/`（文献库 + 结论摘录）、`numerics/`（后置）。
 - **出处**：`company-hard-rules.md § 二·5`
 - **动作**：figs、raw_data、`*.ipynb` 走 git-lfs 或排除出仓。
 
